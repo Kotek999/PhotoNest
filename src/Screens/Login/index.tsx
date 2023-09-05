@@ -1,13 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
-  View,
-  Text,
   ImageBackground,
   ImageSourcePropType,
   SafeAreaView,
   Button,
 } from "react-native";
+import { Text, View } from "react-native-ui-lib";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { SCREEN } from "../../../routes";
 

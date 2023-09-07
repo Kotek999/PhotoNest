@@ -1,49 +1,32 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  ImageBackground,
-  ImageSourcePropType,
-  SafeAreaView,
-  Button,
-} from "react-native";
-import { Text, View } from "react-native-ui-lib";
+import React from "react";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { SCREEN } from "../../../routes";
+import { ImageTemplate } from "../../components/Atoms/ImageTemplate";
+import { TextInput } from "../../components/Atoms/TextInput";
+import { SubmitButton } from "../../components/Atoms/SubmitButton";
+import { QuestionBox } from "../../components/Atoms/QuestionBox";
+import { FormContainer } from "../../components/Atoms/FormContainer";
+import { ScreenName } from "../../components/Atoms/ScreenName";
 
 export const Login = ({ navigation }: NavigationScreenProps<SCREEN.Login>) => {
-  const source: ImageSourcePropType = require("../../assets/bg.png");
+  const onClickGoToTest = () => navigation.navigate(SCREEN.Test);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ImageBackground source={source} resizeMode="cover" style={styles.image}>
-        <Text style={{ textAlign: "center", fontSize: 20 }}>
-          This is Login Screen
-        </Text>
-        <View
-          style={{
-            alignItems: "center",
-            alignSelf: "center",
-            width: "50%",
-            padding: 20,
-          }}
-        >
-          <Button
-            title="Go to Test"
-            onPress={() => navigation.navigate(SCREEN.Test)}
-          />
-        </View>
-      </ImageBackground>
-      <StatusBar style="light" />
-    </SafeAreaView>
+    <ImageTemplate>
+      <FormContainer>
+        <ScreenName title="Login" />
+
+        <TextInput placeholder="Email" />
+        <TextInput placeholder="Password" secureTextEntry />
+
+        <SubmitButton onPress={onClickGoToTest} label="Login" />
+
+        <QuestionBox
+          onPress={onClickGoToTest}
+          title="Don't have an account?"
+          goTo="SignUp"
+        />
+      </FormContainer>
+    </ImageTemplate>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    flex: 1,
-    justifyContent: "center",
-  },
-});

@@ -29,7 +29,7 @@ export const Root = () => {
           options={{
             title: SCREEN.Test,
             headerShown: false,
-            animation: "fade",
+            animation: "slide_from_bottom",
           }}
           component={Test}
         />

@@ -9,25 +9,28 @@ import { FormContainer } from "../../components/Atoms/FormContainer";
 import { ScreenName } from "../../components/Atoms/ScreenName";
 import { Screen } from "../../components/Atoms/Screen";
 
-export const Login = ({ navigation }: NavigationScreenProps<SCREEN.Login>) => {
+export const SignUp = ({
+  navigation,
+}: NavigationScreenProps<SCREEN.SignUp>) => {
   const onClickGoToTest = () => navigation.navigate(SCREEN.Test);
-  const onClickGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
+  const onClickGoToLogin = () => navigation.navigate(SCREEN.Login);
 
   return (
     <Screen>
       <ImageTemplate>
         <FormContainer>
-          <ScreenName title="Login" />
+          <ScreenName title="Sign Up" />
 
+          <TextInput placeholder="Nick" />
           <TextInput placeholder="Email" />
           <TextInput placeholder="Password" secureTextEntry />
 
-          <SubmitButton onPress={onClickGoToTest} label="Login" />
+          <SubmitButton onPress={onClickGoToTest} label="SignUp" />
 
           <QuestionBox
-            onPress={onClickGoToSignUp}
-            title="Don't have an account?"
-            goTo="SignUp"
+            onPress={onClickGoToLogin}
+            title="Already have an account?"
+            goTo="Login"
           />
         </FormContainer>
       </ImageTemplate>

@@ -11,6 +11,8 @@ export const TextInput = (props: TextInputProps) => {
       containerStyle={styles.container}
       color={COLORS.blackText}
       secureTextEntry={props.secureTextEntry}
+      value={props.value}
+      onChangeText={props.onChangeText}
     />
   );
 };

@@ -14,6 +14,8 @@ export type SubmitButtonProps = {
 };
 
 export type TextInputProps = {
+  onChangeText: any;
+  value: string;
   placeholder: string;
   secureTextEntry?: boolean;
 };

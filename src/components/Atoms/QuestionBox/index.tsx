@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "react-native-ui-lib";
 import { QuestionBoxProps } from "../../../types";
+import { COLORS } from "../../../colors";
 
 export const QuestionBox = (props: QuestionBoxProps) => {
   return (
@@ -25,6 +26,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   value: {
-    color: "#FF9347",
+    color: COLORS.orange,
   },
 });

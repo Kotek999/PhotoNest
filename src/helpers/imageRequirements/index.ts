@@ -1,3 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export const loginSignUpImg: ImageSourcePropType = require("../../assets/template.png");
+const loginSignUpImg: ImageSourcePropType = require("../../assets/template.png");
+const backgroundImg: ImageSourcePropType = require("../../assets/background.png");
+
+export { loginSignUpImg, backgroundImg };

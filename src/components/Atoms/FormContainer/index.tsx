@@ -4,6 +4,7 @@ import { View } from "react-native-ui-lib";
 import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 import { ImageTemplate } from "../../../components/Atoms/ImageTemplate";
 import { ChildProps as FormContainerProps } from "../../../types";
+import { COLORS } from "../../../colors";
 
 export const FormContainer = (props: FormContainerProps) => {
   return (
@@ -17,15 +18,15 @@ export const FormContainer = (props: FormContainerProps) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
+    paddingTop: 20,
     alignSelf: "center",
-    backgroundColor: "white",
+    backgroundColor: COLORS.white,
     width: screenWidth,
-    height: screenHeight / 2.5,
+    height: screenHeight / 1.9,
     borderTopLeftRadius: 56,
     borderTopRightRadius: 56,
   },
   container: {
-    top: 0,
     justifyContent: "space-around",
     alignItems: "center",
     alignContent: "center",

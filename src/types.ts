@@ -29,3 +29,16 @@ export type QuestionBoxProps = {
   goTo: string;
   onPress: OnPress;
 };
+
+export type ColorsT = {
+  white: string;
+  orange: string;
+  grayField: string;
+  blackText: string;
+  darkOpacity: string;
+};
+
+export type ButtonsBoxProps = {
+  onPressGoToLogin: OnPress;
+  onPressGoToSignUp: OnPress;
+};

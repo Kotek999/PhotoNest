@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-ui-lib";
 import { SubmitButtonProps } from "../../../types";
+import { COLORS } from "../../../colors";
 
 export const SubmitButton = (props: SubmitButtonProps) => {
   return (
     <Button
       onPress={props.onPress}
       style={styles.container}
-      color="white"
+      color={COLORS.white}
       label={props.label}
       labelStyle={styles.label}
     />
@@ -18,7 +19,7 @@ export const SubmitButton = (props: SubmitButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    backgroundColor: "#FF9347",
+    backgroundColor: COLORS.orange,
     borderRadius: 10,
     marginTop: 25,
   },

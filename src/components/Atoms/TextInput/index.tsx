@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { TextField } from "react-native-ui-lib";
 import { TextInputProps } from "../../../types";
+import { COLORS } from "../../../colors";
 
 export const TextInput = (props: TextInputProps) => {
   return (
     <TextField
       placeholder={props.placeholder}
       containerStyle={styles.container}
-      color="#242B2E"
+      color={COLORS.blackText}
       secureTextEntry={props.secureTextEntry}
     />
   );
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     width: "90%",
     justifyContent: "center",
     marginVertical: 4,
-    backgroundColor: "#d2dae2",
+    backgroundColor: COLORS.grayField,
     borderRadius: 10,
   },
 });

@@ -1,5 +1,4 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   ImageBackground,
@@ -8,13 +7,13 @@ import {
 } from "react-native";
 import { loginSignUpImg as source } from "../../../helpers/imageRequirements";
 import { ChildProps as ImageTemplateProps } from "../../../types";
+import { screenHeight } from "../../../helpers/dimensions";
 
 export const ImageTemplate = (props: ImageTemplateProps) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ImageBackground source={source} resizeMode="cover" style={styles.image}>
         {props.children}
-        <StatusBar style="light" />
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
@@ -23,6 +22,7 @@ export const ImageTemplate = (props: ImageTemplateProps) => {
 const styles = StyleSheet.create({
   image: {
     flex: 1,
+    height: screenHeight / 1.3,
     justifyContent: "flex-end",
   },
 });

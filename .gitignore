@@ -28,6 +28,7 @@ yarn-error.*
 
 # local env files
 .env*.local
+firebaseKeys.json
 
 # typescript
 *.tsbuildinfo

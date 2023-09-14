@@ -1,6 +1,6 @@
-import { ColorsT } from "./types";
+import { Colors } from "./types";
 
-export const COLORS: ColorsT = {
+export const COLORS: Colors = {
   white: "#fff",
   orange: "#FF9347",
   grayField: "#d2dae2",

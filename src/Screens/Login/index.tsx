@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { ActivityIndicator } from "react-native";
-import { View } from "react-native-ui-lib";
+import { Text } from "react-native-ui-lib";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { SCREEN } from "../../../routes";
 import { ImageTemplate } from "../../components/Atoms/ImageTemplate";
@@ -10,30 +9,25 @@ import { QuestionBox } from "../../components/Atoms/QuestionBox";
 import { FormContainer } from "../../components/Atoms/FormContainer";
 import { ScreenName } from "../../components/Atoms/ScreenName";
 import { Screen } from "../../components/Atoms/Screen";
-import { FIREBASE_AUTH } from "../../../FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { COLORS } from "../../colors";
+import { login } from "../../redux/auth/logIn/action";
+import { RootState } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import { useToast } from "../../hooks/toast/useToast";
 
 export const Login = ({ navigation }: NavigationScreenProps<SCREEN.Login>) => {
-  const onClickGoToTest = () => navigation.navigate(SCREEN.Test);
-  const onClickGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
+  const onPressGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
+
+  const { toastMessage } = useToast();
+
+  const dispatch = useDispatch();
+  const loginState = useSelector((state: RootState) => state.login);
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
-  const auth = FIREBASE_AUTH;
-
-  const signIn = async () => {
-    setLoading(true);
-    try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+  const onPressLogin = () => {
+    dispatch(login({ email, password, redirect: navigation.navigate }));
   };
 
   return (
@@ -52,17 +46,19 @@ export const Login = ({ navigation }: NavigationScreenProps<SCREEN.Login>) => {
             onChangeText={(text: string) => setPassword(text)}
             secureTextEntry
           />
-          <SubmitButton onPress={onClickGoToTest} label="Login" />
+          <SubmitButton onPress={onPressLogin} label="Login" />
           <QuestionBox
-            onPress={onClickGoToSignUp}
+            onPress={onPressGoToSignUp}
             title="Don't have an account?"
             goTo="SignUp"
           />
-          {loading && (
+          {toastMessage && <Text>{toastMessage}</Text>}
+          {loginState.error && <Text>Login Error: {loginState.error}</Text>}
+          {/* {loading && (
             <View style={{ margin: 20 }}>
               <ActivityIndicator size="large" color={COLORS.orange} />
             </View>
-          )}
+          )} */}
         </FormContainer>
       </ImageTemplate>
     </Screen>

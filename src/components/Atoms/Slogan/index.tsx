@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { View, Text } from "react-native-ui-lib";
+import { JSX } from "../../../types";
 import { screenWidth } from "../../../helpers/dimensions";
 import { COLORS } from "../../../colors";
 
-export const Slogan = () => {
+export const Slogan = (): JSX => {
   return (
     <View style={styles.container}>
       <Text style={styles.firstValue}>

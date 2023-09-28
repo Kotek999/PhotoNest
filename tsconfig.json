@@ -4,6 +4,7 @@
     "paths": {
       "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     },
+    "types": ["connect-history-api-fallback"],
     "strict": true
   }
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-ui-lib";
-import { ScreenNameProps } from "../../../types";
+import { JSX, ScreenNameProps } from "../../../types";
 import { COLORS } from "../../../colors";
 
-export const ScreenName = (props: ScreenNameProps) => {
+export const ScreenName = (props: ScreenNameProps): JSX => {
   return <Text style={styles.value}>{props.title}</Text>;
 };
 

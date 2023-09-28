@@ -1,9 +1,9 @@
 import React from "react";
 import { ImageBackground } from "react-native";
 import { backgroundImg as source } from "../../../helpers/imageRequirements";
-import { ChildProps as BackgroundProps } from "../../../types";
+import { JSX, ChildProps as BackgroundProps } from "../../../types";
 
-export const Background = (props: BackgroundProps) => {
+export const Background = (props: BackgroundProps): JSX => {
   return (
     <ImageBackground
       source={source}

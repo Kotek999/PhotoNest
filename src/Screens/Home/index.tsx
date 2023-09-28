@@ -1,20 +1,26 @@
+import React from "react";
 import { View, Text, Button } from "react-native-ui-lib";
-import { auth } from "../../../FirebaseConfig";
 import { NavigationScreenProps } from "../../../rootTypeList";
+import { JSX } from "../../types";
 import { SCREEN } from "../../../routes";
-import { useDispatch } from "react-redux";
-import { signOutRequest } from "../../redux/auth/signOut/action";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../redux/auth/signOut/action";
 import { useToast } from "../../hooks/toast/useToast";
 import { ToastAndroid } from "react-native";
+import { userEmail } from "../../selectors/userAuth";
 
-export const Home = ({ navigation }: NavigationScreenProps<SCREEN.SignUp>) => {
+export const Home = ({
+  navigation,
+}: NavigationScreenProps<SCREEN.SignUp>): JSX => {
   const { showToast } = useToast();
 
   const dispatch = useDispatch();
 
+  const email = useSelector(userEmail);
+
   const onPressSignOut = () => {
-    dispatch(signOutRequest({ redirect: navigation.goBack }));
-    showToast({ message: "Logout...", duration: ToastAndroid.SHORT });
+    dispatch(signOut({ redirect: navigation.navigate }));
+    showToast({ message: "Correct Logout", duration: ToastAndroid.SHORT });
   };
 
   return (
@@ -27,7 +33,7 @@ export const Home = ({ navigation }: NavigationScreenProps<SCREEN.SignUp>) => {
         alignContent: "center",
       }}
     >
-      <Text>hi, it's home screen + {auth.currentUser?.email}</Text>
+      <Text>{`Welcome ${email}, have a nice day.`}</Text>
       <Button onPress={onPressSignOut} label="Back" />
     </View>
   );

@@ -1,5 +1,7 @@
+import textData from "../../../../textData.json";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, User, AuthAction as LoginAction } from "../../../types";
+import { AuthState, AuthAction as LoginAction } from "../../../types";
+import { User } from "firebase/auth";
 
 const initialState: AuthState = {
   user: null,
@@ -8,7 +10,7 @@ const initialState: AuthState = {
 };
 
 const loginSlice = createSlice({
-  name: "auth",
+  name: textData.value.auth,
   initialState,
   reducers: {
     login: (state, action: LoginAction) => {
@@ -24,9 +26,13 @@ const loginSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
 });
 
-export const { login, loginSuccess, loginFailure } = loginSlice.actions;
+export const { login, loginSuccess, loginFailure, clearError } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

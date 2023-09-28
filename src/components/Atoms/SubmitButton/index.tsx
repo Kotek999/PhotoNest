@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-ui-lib";
-import { SubmitButtonProps } from "../../../types";
+import { JSX, SubmitButtonProps } from "../../../types";
 import { COLORS } from "../../../colors";
 
-export const SubmitButton = (props: SubmitButtonProps) => {
+export const SubmitButton = (props: SubmitButtonProps): JSX => {
   return (
     <Button
       onPress={props.onPress}

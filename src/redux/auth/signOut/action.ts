@@ -1,3 +1,4 @@
+import textData from "../../../../textData.json";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, RedirectAction } from "../../../types";
 
@@ -8,10 +9,10 @@ const initialState: AuthState = {
 };
 
 const signOutSlice = createSlice({
-  name: "auth",
+  name: textData.value.auth,
   initialState,
   reducers: {
-    signOutRequest: (state, action: RedirectAction) => {
+    signOut: (state, action: RedirectAction) => {
       state.loading = true;
       const { redirect } = action.payload;
       state.user = null;
@@ -29,7 +30,6 @@ const signOutSlice = createSlice({
   },
 });
 
-export const { signOutRequest, signOutSuccess, signOutFailure } =
-  signOutSlice.actions;
+export const { signOut, signOutSuccess, signOutFailure } = signOutSlice.actions;
 
 export default signOutSlice.reducer;

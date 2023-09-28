@@ -1,5 +1,6 @@
 import React from "react";
 import { NavigationScreenProps } from "../../../rootTypeList";
+import { JSX } from "../../types";
 import { SCREEN } from "../../../routes";
 import { Screen } from "../../components/Atoms/Screen";
 import { Slogan } from "../../components/Atoms/Slogan";
@@ -8,7 +9,7 @@ import { Background } from "../../components/Atoms/Background";
 
 export const Welcome = ({
   navigation,
-}: NavigationScreenProps<SCREEN.SignUp>) => {
+}: NavigationScreenProps<SCREEN.SignUp>): JSX => {
   const onPressGoToLogin = () => navigation.navigate(SCREEN.Login);
   const onPressGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
 

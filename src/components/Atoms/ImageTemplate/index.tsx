@@ -6,10 +6,10 @@ import {
   Keyboard,
 } from "react-native";
 import { loginSignUpImg as source } from "../../../helpers/imageRequirements";
-import { ChildProps as ImageTemplateProps } from "../../../types";
+import { JSX, ChildProps as ImageTemplateProps } from "../../../types";
 import { screenHeight } from "../../../helpers/dimensions";
 
-export const ImageTemplate = (props: ImageTemplateProps) => {
+export const ImageTemplate = (props: ImageTemplateProps): JSX => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ImageBackground source={source} resizeMode="cover" style={styles.image}>

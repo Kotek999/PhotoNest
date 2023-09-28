@@ -5,5 +5,7 @@ export const COLORS: Colors = {
   orange: "#FF9347",
   grayField: "#d2dae2",
   blackText: "#242B2E",
-  darkOpacity: "#000000a0"
+  darkOpacity: "#000000a0",
+  blank: "transparent",
+  redError: "#F22613",
 };

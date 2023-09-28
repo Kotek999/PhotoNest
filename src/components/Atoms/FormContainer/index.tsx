@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native";
 import { View } from "react-native-ui-lib";
 import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 import { ImageTemplate } from "../../../components/Atoms/ImageTemplate";
-import { ChildProps as FormContainerProps } from "../../../types";
+import { JSX, ChildProps as FormContainerProps } from "../../../types";
 import { COLORS } from "../../../colors";
 
-export const FormContainer = (props: FormContainerProps) => {
+export const FormContainer = (props: FormContainerProps): JSX => {
   return (
     <ImageTemplate>
       <View style={styles.mainContainer}>
@@ -18,7 +18,7 @@ export const FormContainer = (props: FormContainerProps) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    paddingTop: 20,
+    paddingTop: 10,
     alignSelf: "center",
     backgroundColor: COLORS.white,
     width: screenWidth,

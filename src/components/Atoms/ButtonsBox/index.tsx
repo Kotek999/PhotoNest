@@ -1,15 +1,22 @@
+import textData from "../../../../textData.json";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { View } from "react-native-ui-lib";
 import { SubmitButton as Button } from "../SubmitButton";
 import { screenWidth } from "../../../helpers/dimensions";
-import { ButtonsBoxProps } from "../../../types";
+import { JSX, ButtonsBoxProps } from "../../../types";
 
-export const ButtonsBox = (props: ButtonsBoxProps) => {
+export const ButtonsBox = (props: ButtonsBoxProps): JSX => {
   return (
     <View style={styles.container}>
-      <Button onPress={props.onPressGoToLogin} label="Login" />
-      <Button onPress={props.onPressGoToSignUp} label="SignUp" />
+      <Button
+        onPress={props.onPressGoToLogin}
+        label={textData.value.form.login}
+      />
+      <Button
+        onPress={props.onPressGoToSignUp}
+        label={textData.value.form.sUButton}
+      />
     </View>
   );
 };

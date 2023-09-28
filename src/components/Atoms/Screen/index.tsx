@@ -1,8 +1,8 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { ChildProps as ScreenProps } from "../../../types";
+import { JSX, ChildProps as ScreenProps } from "../../../types";
 
-export const Screen = (props: ScreenProps) => {
+export const Screen = (props: ScreenProps): JSX => {
   return (
     <>
       {props.children}

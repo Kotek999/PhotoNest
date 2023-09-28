@@ -1,5 +1,7 @@
+import textData from "../../../../textData.json";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, User, SignUpAction } from "../../../types";
+import { AuthState, SignUpAction } from "../../../types";
+import { User } from "firebase/auth";
 
 const initialState: AuthState = {
   user: null,
@@ -8,7 +10,7 @@ const initialState: AuthState = {
 };
 
 const signUpSlice = createSlice({
-  name: "auth",
+  name: textData.value.auth,
   initialState,
   reducers: {
     signUp: (state, action: SignUpAction) => {
@@ -24,9 +26,13 @@ const signUpSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
 });
 
-export const { signUp, signUpSuccess, signUpFailure } = signUpSlice.actions;
+export const { signUp, signUpSuccess, signUpFailure, clearError } =
+  signUpSlice.actions;
 
 export default signUpSlice.reducer;

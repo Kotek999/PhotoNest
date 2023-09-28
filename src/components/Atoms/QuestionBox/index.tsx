@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "react-native-ui-lib";
-import { QuestionBoxProps } from "../../../types";
+import { JSX, QuestionBoxProps } from "../../../types";
 import { COLORS } from "../../../colors";
 
-export const QuestionBox = (props: QuestionBoxProps) => {
+export const QuestionBox = (props: QuestionBoxProps): JSX => {
   return (
     <View style={styles.mainContainer}>
       <Text>{props.title}</Text>
@@ -19,7 +19,8 @@ export const QuestionBox = (props: QuestionBoxProps) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginTop: 20,
+    marginTop: 30,
+    marginBottom: 20,
     flexDirection: "row",
   },
   container: {

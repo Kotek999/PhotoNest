@@ -10,17 +10,20 @@ import {
 import { getUserToken } from "../../../helpers/functions/getUserToken";
 import { getUserCredentials } from "../../../helpers/functions/getUserCredentials";
 import { auth } from "../../../../FirebaseConfig";
+import { getHashedMethod } from "../../../helpers/functions/getHashedMethod";
 
 function* onAuthTokenSaga(action: RedirectAction) {
   const userCredentials: Credentials = yield call(getUserCredentials);
   const token: UserCredential = yield call(getUserToken);
 
   try {
+    const decryptedPassword = getHashedMethod(userCredentials.password).decrypt;
+
     const authUserAgain: UserCredential = yield call(
       signInWithEmailAndPasswordFirebase,
       auth,
       userCredentials.email,
-      userCredentials.password
+      decryptedPassword
     );
 
     if (token) {

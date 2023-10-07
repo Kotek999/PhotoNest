@@ -9,10 +9,12 @@ import { auth } from "../../../../FirebaseConfig";
 import { login, loginSuccess, loginFailure } from "./action";
 import { SCREEN } from "../../../../routes";
 import { AuthAction as LoginAction } from "../../../types";
+import { getHashedMethod } from "../../../helpers/functions/getHashedMethod";
 
 function* onLoginSaga(action: LoginAction) {
   try {
     const { email, password } = action.payload;
+
     const userCredential: UserCredential = yield call(
       signInWithEmailAndPasswordFirebase,
       auth,
@@ -20,10 +22,12 @@ function* onLoginSaga(action: LoginAction) {
       password
     );
 
+    const encryptedPassword = getHashedMethod(password).encrypt;
+
     const credentials = {
       type: "EmailAndPassword",
       email: email,
-      password: password,
+      password: encryptedPassword,
     };
 
     const data = userCredential;

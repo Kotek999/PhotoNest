@@ -43,7 +43,7 @@ const errorCodeAuth: ErrorCodeAuth = {
   invalidEmail: textData.value.error.codes.invalidEmail,
   emailAlreadyInUse: textData.value.error.codes.emailAlreadyInUse,
   userNotFound: textData.value.error.codes.userNotFound,
-  missingPassword: textData.value.error.codes.missingEmail,
+  missingPassword: textData.value.error.codes.missingPassword,
   wrongPassword: textData.value.error.codes.wrongPassword,
   tooManyRequests: textData.value.error.codes.tooManyRequests,
   emptyField: textData.value.customError.emptyField,

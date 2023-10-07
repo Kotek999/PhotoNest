@@ -4175,6 +4175,11 @@ crypt@0.0.2, crypt@~0.0.1:
   resolved "https://registry.npmjs.org/crypt/-/crypt-0.0.2.tgz"
   integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
 
+crypto-es@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/crypto-es/-/crypto-es-2.0.4.tgz#8a7cc6cdf7416a18f9ff85f9b5f45066f5e30366"
+  integrity sha512-GJxgJJ7HjGzwT7iQF0K9RertKkzgSKUXd8X2aQ7RGDS8yMVDzIBFMNHID9hnj48Ep8NAICHWV1CFIETlVNZ/Lg==
+
 crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-1.0.0.tgz"

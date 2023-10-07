@@ -195,3 +195,8 @@ export type Credentials = {
 };
 
 export type CancelStyle = "cancel" | "default" | "destructive" | undefined;
+
+export type HashedValue = {
+  encrypt: string;
+  decrypt: string;
+};

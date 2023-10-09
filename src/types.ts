@@ -71,6 +71,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 export type FireBaseApp = {
   apiKey: string;
   authDomain: string;
+  databaseURL: string;
   projectId: string;
   storageBucket: string;
   messagingSenderId: string;
@@ -188,6 +189,8 @@ export type UserData = {
   };
 };
 
+export type UserDataInfo = UserData | string;
+
 export type Credentials = {
   type: string;
   email: string;
@@ -200,3 +203,7 @@ export type HashedValue = {
   encrypt: string;
   decrypt: string;
 };
+
+export type SetUserData = React.Dispatch<
+  React.SetStateAction<string | UserData>
+>;

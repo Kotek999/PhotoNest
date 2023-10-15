@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   View,
@@ -10,6 +9,7 @@ import {
 } from "react-native";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { SCREEN } from "../../../routes";
+import { Screen } from "../../components/Atoms/Screen";
 import { useSelector, useDispatch } from "react-redux";
 import { counterSlice } from "../../redux/counter/action";
 
@@ -19,35 +19,40 @@ export const Test = ({ navigation }: NavigationScreenProps<SCREEN.Test>) => {
   const source: ImageSourcePropType = require("../../assets/bg.png");
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ImageBackground source={source} resizeMode="cover" style={styles.image}>
-        <Text style={{ textAlign: "center", fontSize: 20 }}>
-          This is Test Screen ---- {counter}
-        </Text>
-        <View
-          style={{
-            alignItems: "center",
-            alignSelf: "center",
-            width: "50%",
-            padding: 20,
-          }}
+    <Screen styleOfStatusBar="dark">
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={source}
+          resizeMode="cover"
+          style={styles.image}
         >
-          <Button
-            title="Back to Login"
-            onPress={() => navigation.navigate(SCREEN.Login)}
-          />
-          <Button
-            title="Increase"
-            onPress={() => dispatch(counterSlice.actions.increment())}
-          />
-          <Button
-            title="decrease"
-            onPress={() => dispatch(counterSlice.actions.decrement())}
-          />
-        </View>
-      </ImageBackground>
-      <StatusBar style="light" />
-    </SafeAreaView>
+          <Text style={{ textAlign: "center", fontSize: 20 }}>
+            This is Test Screen ---- {counter}
+          </Text>
+          <View
+            style={{
+              alignItems: "center",
+              alignSelf: "center",
+              width: "50%",
+              padding: 20,
+            }}
+          >
+            <Button
+              title="Back to Login"
+              onPress={() => navigation.navigate(SCREEN.Login)}
+            />
+            <Button
+              title="Increase"
+              onPress={() => dispatch(counterSlice.actions.increment())}
+            />
+            <Button
+              title="decrease"
+              onPress={() => dispatch(counterSlice.actions.decrement())}
+            />
+          </View>
+        </ImageBackground>
+      </SafeAreaView>
+    </Screen>
   );
 };
 

@@ -46,7 +46,7 @@ export const SignUp = ({
   const emailRule = email !== "";
 
   return (
-    <Screen>
+    <Screen styleOfStatusBar="light">
       <ImageTemplate>
         {isLoading ? (
           <Spinner />

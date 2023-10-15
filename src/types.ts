@@ -1,10 +1,11 @@
 import { ReactNode, Dispatch } from "react";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, GestureResponderEvent } from "react-native";
+import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
 
-type Children = ReactNode;
+export type Children = ReactNode;
 export type JSX = React.JSX.Element;
 
 type OnChangeText = (text: string) => void;
@@ -13,6 +14,7 @@ export type OnPress = () => void;
 
 export type ChildProps = {
   children: Children;
+  styleOfStatusBar?: StatusBarStyle;
 };
 
 export type SubmitButtonProps = {
@@ -59,6 +61,8 @@ export type Colors = {
   darkOpacity: string;
   blank: string;
   redError: string;
+  grayItemMenu: string;
+  lightGrayBg: string;
 };
 
 export type ButtonsBoxProps = {
@@ -207,3 +211,37 @@ export type HashedValue = {
 export type SetUserData = React.Dispatch<
   React.SetStateAction<string | UserData>
 >;
+
+export type SetUserVisible = React.Dispatch<React.SetStateAction<boolean>>;
+
+export type BottomTabBarIconProps = {
+  isFocused: boolean;
+  iconName: string;
+  iconTitle: string;
+};
+
+type GestureEvent = (event: GestureResponderEvent | undefined) => void;
+
+type LoggedUserDisplayName = {
+  displayName?: UserDataInfo;
+};
+
+type LoggedUserShow = {
+  showLoggedUser?: GestureEvent;
+};
+
+type LoggedUserVisible = {
+  isUserVisible?: boolean;
+};
+
+export type LoggedUserProps = LoggedUserVisible & LoggedUserDisplayName;
+
+export type LoggedUserWithAvatarProps = LoggedUserShow & LoggedUserProps;
+
+export type TouchableAvatarProps = LoggedUserShow & LoggedUserDisplayName;
+
+export type HeaderProps = LoggedUserWithAvatarProps & {
+  onPress: OnPress;
+  isUserShow: boolean;
+  screenName?: string;
+};

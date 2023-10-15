@@ -2,18 +2,19 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParamList } from "./rootTypeList";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { JSX } from "./src/types";
 import { SCREEN } from "./routes";
 import { COLORS } from "./src/colors";
 import { Auth } from "./src/Screens/Auth";
 import { Welcome } from "./src/Screens/Welcome";
 import { Login } from "./src/Screens/Login";
 import { SignUp } from "./src/Screens/SignUp";
-import { Home } from "./src/Screens/Home";
 import { Test } from "./src/Screens/Test";
+import { RootTab } from "./rootTab";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export const Root = () => {
+export const Root = (): JSX => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -36,7 +37,7 @@ export const Root = () => {
             headerShown: false,
             animation: "fade",
           }}
-          component={Home}
+          component={RootTab}
         />
         <Stack.Screen
           name={SCREEN.Welcome}
@@ -56,7 +57,6 @@ export const Root = () => {
           }}
           component={Login}
         />
-
         <Stack.Screen
           name={SCREEN.SignUp}
           options={{
@@ -66,7 +66,6 @@ export const Root = () => {
           }}
           component={SignUp}
         />
-
         <Stack.Screen
           name={SCREEN.Test}
           options={{

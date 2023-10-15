@@ -6,7 +6,11 @@ export type RootStackParamList = {
   Login: undefined;
   SignUp: undefined;
   Home: undefined;
+  Gallery: undefined;
   Test: undefined;
+  Favorite: undefined;
+  Find: undefined;
+  Profile: undefined;
 };
 
 export type NavigationScreenProps<T extends keyof RootStackParamList> = {

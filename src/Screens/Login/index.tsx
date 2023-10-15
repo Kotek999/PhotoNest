@@ -43,7 +43,7 @@ export const Login = ({
   };
 
   return (
-    <Screen>
+    <Screen styleOfStatusBar="light">
       <ImageTemplate>
         {isLoading ? (
           <Spinner />

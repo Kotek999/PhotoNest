@@ -8,4 +8,6 @@ export const COLORS: Colors = {
   darkOpacity: "#000000a0",
   blank: "transparent",
   redError: "#F22613",
+  grayItemMenu: "#748c94",
+  lightGrayBg: "#EEEEEE",
 };

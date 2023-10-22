@@ -58,7 +58,7 @@ export const RootTab = (): JSX => {
         }}
         component={Favorite}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={SCREEN.Test}
         options={{
           title: SCREEN.Test,
@@ -71,7 +71,7 @@ export const RootTab = (): JSX => {
           ),
         }}
         component={Test}
-      />
+      /> */}
       <Tab.Screen
         name={SCREEN.Find}
         options={{

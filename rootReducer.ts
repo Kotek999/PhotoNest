@@ -2,6 +2,7 @@ import tokenReducer from "./src/redux/auth/authToken/action";
 import loginReducer from "./src/redux/auth/logIn/action";
 import signUpReducer from "./src/redux/auth/signUp/action";
 import signOutReducer from "./src/redux/auth/signOut/action";
+import savePhotoReducer from "./src/redux/savePhotos/action";
 import { combineReducers } from "redux";
 
 export const rootReducer = combineReducers({
@@ -9,4 +10,6 @@ export const rootReducer = combineReducers({
   login: loginReducer,
   signUp: signUpReducer,
   signOut: signOutReducer,
+
+  savePhoto: savePhotoReducer,
 });

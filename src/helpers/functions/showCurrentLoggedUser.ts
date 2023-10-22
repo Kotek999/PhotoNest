@@ -1,5 +1,5 @@
 import { LayoutAnimation, UIManager, Platform } from "react-native";
-import { SetUserVisible } from "../../types";
+import { SetState } from "../../types";
 
 if (
   Platform.OS === "android" &&
@@ -9,7 +9,7 @@ if (
 }
 
 export const showCurrentLoggedUser = (
-  setUserVisible: SetUserVisible,
+  setUserVisible: SetState<boolean>,
   isUserVisible: boolean
 ) => {
   LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

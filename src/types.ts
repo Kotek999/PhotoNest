@@ -1,12 +1,17 @@
-import { ReactNode, Dispatch } from "react";
-import { ToastAndroid, GestureResponderEvent } from "react-native";
+import { ReactNode } from "react";
+import {
+  ToastAndroid,
+  GestureResponderEvent,
+  RefreshControlProps,
+} from "react-native";
 import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
-import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
 
 export type Children = ReactNode;
 export type JSX = React.JSX.Element;
+export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type OnChangeText = (text: string) => void;
 
@@ -15,6 +20,12 @@ export type OnPress = () => void;
 export type ChildProps = {
   children: Children;
   styleOfStatusBar?: StatusBarStyle;
+  refreshControl?:
+    | React.ReactElement<
+        RefreshControlProps,
+        string | React.JSXElementConstructor<any>
+      >
+    | undefined;
 };
 
 export type SubmitButtonProps = {
@@ -163,8 +174,6 @@ export type ErrorValues = {
   [key: string]: ErrorMessage;
 };
 
-export type SetValue = Dispatch<React.SetStateAction<string>>;
-
 export type UserData = {
   user: {
     uid: string;
@@ -208,12 +217,6 @@ export type HashedValue = {
   decrypt: string;
 };
 
-export type SetUserData = React.Dispatch<
-  React.SetStateAction<string | UserData>
->;
-
-export type SetUserVisible = React.Dispatch<React.SetStateAction<boolean>>;
-
 export type BottomTabBarIconProps = {
   isFocused: boolean;
   iconName: string;
@@ -244,4 +247,75 @@ export type HeaderProps = LoggedUserWithAvatarProps & {
   onPress: OnPress;
   isUserShow: boolean;
   screenName?: string;
+};
+
+type DateInfo = {
+  date: string;
+  time: string;
+};
+
+export type PhotoAddedInfoProps = {
+  displayName: UserDataInfo;
+  addedBy: UserDataInfo;
+  createdAt: DateInfo;
+};
+
+export type ImageAssetsData = {
+  directUrl: string;
+  addedBy: UserDataInfo;
+  createdAt: DateInfo;
+  type: "image" | "video";
+};
+
+export type ImageAssets = {
+  assets: ImageAssetsData[];
+};
+
+export type RenderAddedPhotosProps = {
+  displayName: UserDataInfo;
+  photos: ImageAssetsData[];
+};
+
+export type PhotoInfoProps = {
+  displayName: UserDataInfo;
+  setAddedPhoto: SetState<string>;
+  dispatch: Dispatch;
+  setPhotos: SetState<ImageAssetsData[]>;
+  setIsPhotosLoaded: SetState<boolean>;
+};
+
+export type RefreshProps = {
+  setRefreshing: SetState<boolean>;
+  getPhotos: () => void;
+};
+
+export type AddPhotoButtonProps = {
+  mediaPermission: boolean | null;
+  setIsPermissionRequest: SetState<boolean>;
+  addPhoto: () => Promise<void>;
+};
+
+export type TitleProps = {
+  title: string;
+  isPermissionRequest?: boolean;
+};
+
+type UriSource = {
+  uri: string;
+};
+
+export type PhotoProps = UriSource & {
+  mb?: number | undefined;
+};
+
+export type AddedPhotoProps = UriSource;
+
+export type PhotoContentProps = {
+  isContentLoaded: boolean;
+  mediaPermission: boolean | null;
+  addedPhoto: string;
+  isPhotosLoaded: boolean;
+  photos: ImageAssetsData[];
+  displayName: UserDataInfo;
+  isPermissionRequest: boolean;
 };

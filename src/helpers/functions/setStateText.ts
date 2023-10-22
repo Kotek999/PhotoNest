@@ -1,5 +1,5 @@
-import { SetValue } from "../../types";
+import { SetState } from "../../types";
 
-export const setStateText = (setValue: SetValue) => {
+export const setStateText = (setValue: SetState<string>) => {
   return (text: string) => setValue(text);
 };

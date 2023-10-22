@@ -1,10 +1,10 @@
 import textData from "../../../textData.json";
 import { db, auth } from "../../../FirebaseConfig";
 import { ref, get } from "firebase/database";
-import { SetUserData, UserData } from "../../types";
+import { SetState, UserData } from "../../types";
 
 export const getUserDataFromFirebase = async (
-  setUserData: SetUserData,
+  setUserData: SetState<UserData | string>,
   fieldPath: string
 ) => {
   try {

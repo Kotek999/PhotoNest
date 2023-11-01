@@ -1,3 +1,4 @@
+import textData from "../../../textData.json";
 import { takeLatest, all, put } from "redux-saga/effects";
 import { savePhoto, savePhotoSuccess, savePhotoFailure } from "./action";
 import { ref, set, push } from "firebase/database";
@@ -11,7 +12,12 @@ function* onSavePhoto(action: PayloadAction<ImageAssets>) {
     const { assets } = action.payload;
 
     const setAllPhotos = set(
-      ref(db, `public/photos/${generateUniqueValues(18).uniqueIdValue}`),
+      ref(
+        db,
+        `${textData.value.firebase.photoContentRef}${
+          generateUniqueValues(18).uniqueIdValue
+        }`
+      ),
       assets && {
         photo: {
           directUrl: assets[0].directUrl,
@@ -26,7 +32,10 @@ function* onSavePhoto(action: PayloadAction<ImageAssets>) {
     );
 
     const setPhotoData = push(
-      ref(db, `users/${auth.currentUser?.uid}/photo`),
+      ref(
+        db,
+        `${textData.value.firebase.usersPath}${auth.currentUser?.uid}${textData.value.firebase.photoPath}`
+      ),
       assets && {
         directUrl: assets[0].directUrl,
       }

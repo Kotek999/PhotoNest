@@ -9,7 +9,7 @@ export const Screen = (props: ScreenProps): JSX => {
       {props.children}
       <StatusBar
         style={props.styleOfStatusBar}
-        backgroundColor={COLORS.white}
+        backgroundColor={COLORS.blank}
       />
     </>
   );

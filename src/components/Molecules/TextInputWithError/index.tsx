@@ -14,6 +14,8 @@ export const TextInputWithError = (props: TextInputWithErrorProps): JSX => {
     <>
       <TextInput
         value={props.value}
+        leadingAccessory={props.leadingAccessory}
+        trailingAccessory={props.trailingAccessory}
         placeholder={props.placeholder}
         onChangeText={props.onChangeText}
         borderColor={

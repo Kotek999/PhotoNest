@@ -8,6 +8,7 @@ export const useRefresh = (props: RefreshProps) => {
       props.setRefreshing(false);
     }, 1500);
     props.getPhotos();
+    props.showLoggedUser();
   }, []);
   return refresh;
 };

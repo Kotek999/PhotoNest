@@ -8,13 +8,18 @@ import { generateDateMessage } from "../../../helpers/functions/generateDateMess
 import { getCurrentDateAndTime } from "../../../helpers/functions/getCurrentDateAndTime";
 
 export const PhotoAddedInfo = (props: PhotoAddedInfoProps): JSX => {
+  const getDateMessage = generateDateMessage(
+    `${props.createdAt.date} ${props.createdAt.time}`,
+    getCurrentDateAndTime()
+  );
+
   return (
     <View style={styles.mainContainer}>
       <Avatar
         label={getFirstLetter(props.addedBy as string)}
         labelColor="white"
         size={40}
-        backgroundColor={COLORS.orange}
+        backgroundColor={COLORS.darkOpacity}
       />
       <View style={styles.container}>
         <Text style={styles.value}>
@@ -25,12 +30,7 @@ export const PhotoAddedInfo = (props: PhotoAddedInfoProps): JSX => {
             (props.addedBy as Children)
           )}
         </Text>
-        <Text style={styles.value}>
-          {generateDateMessage(
-            `${props.createdAt.date} ${props.createdAt.time}`,
-            getCurrentDateAndTime()
-          )}
-        </Text>
+        <Text style={styles.value}>{getDateMessage}</Text>
       </View>
     </View>
   );

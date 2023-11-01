@@ -11,6 +11,7 @@ import { Login } from "./src/Screens/Login";
 import { SignUp } from "./src/Screens/SignUp";
 import { Test } from "./src/Screens/Test";
 import { RootTab } from "./rootTab";
+import { Settings } from "./src/Screens/Settings";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -65,6 +66,15 @@ export const Root = (): JSX => {
             animation: "fade",
           }}
           component={SignUp}
+        />
+        <Stack.Screen
+          name={SCREEN.Settings}
+          options={{
+            title: SCREEN.Settings,
+            headerShown: false,
+            animation: "fade",
+          }}
+          component={Settings}
         />
         <Stack.Screen
           name={SCREEN.Test}

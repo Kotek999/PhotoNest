@@ -10,4 +10,5 @@ export const COLORS: Colors = {
   redError: "#F22613",
   grayItemMenu: "#748c94",
   lightGrayBg: "#EEEEEE",
+  lightGreen: "#93faa5",
 };

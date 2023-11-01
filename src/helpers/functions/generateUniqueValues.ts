@@ -1,11 +1,12 @@
+import textData from "../../../textData.json";
+
 export const generateUniqueValues = (
   length: number
 ): {
   uniqueIdValue: string;
   uniqueIdFileName: string;
 } => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters = textData.value.generally.characters;
   let uniqueId = "";
 
   for (let i = 0; i < length; i++) {

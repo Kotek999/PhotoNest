@@ -1,28 +1,43 @@
 import React from "react";
 import {
   StyleSheet,
-  ImageBackground,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
-import { loginSignUpImg as source } from "../../../helpers/imageRequirements";
+import { View } from "react-native-ui-lib";
 import { JSX, ChildProps as ImageTemplateProps } from "../../../types";
-import { screenHeight } from "../../../helpers/dimensions";
+import { loginSignUpImg as source } from "../../../helpers/imageRequirements";
+import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 
 export const ImageTemplate = (props: ImageTemplateProps): JSX => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ImageBackground source={source} resizeMode="cover" style={styles.image}>
-        {props.children}
-      </ImageBackground>
+      <View style={styles.mainContainer}>
+        <Image source={source} resizeMode="cover" style={styles.image} />
+        <View style={styles.container}>{props.children}</View>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  image: {
+  mainContainer: {
     flex: 1,
-    height: screenHeight / 1.3,
-    justifyContent: "flex-end",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  image: {
+    width: screenWidth,
+    height: screenHeight / 2.5,
+  },
+  container: {
+    marginTop: -50,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderTopLeftRadius: 50,
   },
 });

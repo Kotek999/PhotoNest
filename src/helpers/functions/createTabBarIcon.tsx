@@ -14,17 +14,9 @@ export const createTabBarIcon = (props: BottomTabBarIconProps): JSX => {
     <View style={styles.container}>
       <FontAwesome5
         name={props.iconName}
-        size={20}
+        size={24}
         color={colorOfItemsOnMenu}
       />
-      <Text
-        style={{
-          fontSize: 14,
-          color: colorOfItemsOnMenu,
-        }}
-      >
-        {props.iconTitle}
-      </Text>
     </View>
   );
 };

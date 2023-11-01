@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Incubator } from "react-native-ui-lib";
+import { Incubator, Text } from "react-native-ui-lib";
 import { JSX, TextInputProps } from "../../../types";
 import { COLORS } from "../../../colors";
 
@@ -10,6 +10,8 @@ export const TextInput = (props: TextInputProps): JSX => {
   return (
     <TextField
       placeholder={props.placeholder}
+      leadingAccessory={props.leadingAccessory}
+      trailingAccessory={props.trailingAccessory}
       containerStyle={{ ...styles.container, borderColor: props.borderColor }}
       color={COLORS.blackText}
       secureTextEntry={props.secureTextEntry}

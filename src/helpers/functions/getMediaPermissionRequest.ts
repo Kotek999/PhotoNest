@@ -1,7 +1,8 @@
+import textData from "../../../textData.json";
 import appJSON from "../../../app.json";
 import * as MediaLibrary from "expo-media-library";
 import { Alert, Linking } from "react-native";
-import { SetState } from "../../types";
+import { CancelStyle, SetState } from "../../types";
 
 export const getMediaPermissionRequest = async (
   setPermission: SetState<boolean | null>
@@ -11,18 +12,22 @@ export const getMediaPermissionRequest = async (
 
   if (!granted) {
     Alert.alert(
-      "Permission needed",
-      `In order to use the media library, you must give permission for ${`${appJSON.expo.name}`} to access the camera. You can grant this permission in the Settings app.`,
+      textData.value.alert.permission.title,
+      `${
+        textData.value.alert.permission.content.part1
+      } ${`${appJSON.expo.name}`} ${
+        textData.value.alert.permission.content.part2
+      } `,
       [
         {
-          text: "Cancel",
+          text: textData.value.alert.cancel,
           onPress: () => {
             return;
           },
-          style: "cancel",
+          style: textData.value.alert.cancelStyle as CancelStyle,
         },
         {
-          text: "Go to Settings",
+          text: textData.value.alert.permission.settings,
           onPress: () => Linking.openSettings(),
         },
       ],

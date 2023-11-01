@@ -10,4 +10,5 @@ export enum SCREEN {
   Favorite = "Favorite",
   Find = "Find",
   Profile = "Profile",
+  Settings = "Settings",
 }

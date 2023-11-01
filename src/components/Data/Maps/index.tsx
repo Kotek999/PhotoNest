@@ -1,6 +1,8 @@
 import { errorCodes } from "../ErrorCodes";
+import { LeadingIcon } from "../../../components/Atoms/LeadingIcon";
+import { JSX } from "../../../types";
 
-export const checkerErrorsMap: Record<string, string> = {
+const checkerErrorsMap: Record<string, string> = {
   [errorCodes.error.missingEmail]: errorCodes.message.missingEmail,
   [errorCodes.error.invalidEmail]: errorCodes.message.invalidEmail,
   [errorCodes.error.emailAlreadyInUse]: errorCodes.message.emailAlreadyInUse,
@@ -14,3 +16,26 @@ export const checkerErrorsMap: Record<string, string> = {
     errorCodes.message.nickSpecialCharacter,
   [errorCodes.error.passwordLength]: errorCodes.message.passwordLength,
 };
+
+const leadingIconMap: Record<string, JSX> = {
+  ["nick"]: (
+    <>
+      <LeadingIcon name="account-circle" />
+    </>
+  ),
+  ["email"]: (
+    <>
+      <LeadingIcon name="email" />
+    </>
+  ),
+  ["password"]: (
+    <>
+      <LeadingIcon name="lock" />
+    </>
+  ),
+};
+
+const leadingAccessoryIcon = (name: string): JSX =>
+  leadingIconMap[name] || "Invalid icon name";
+
+export { checkerErrorsMap, leadingAccessoryIcon };

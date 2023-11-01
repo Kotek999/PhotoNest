@@ -10,12 +10,12 @@ import { SCREEN } from "../../../routes";
 import { ScrollViewContainer } from "../../components/Atoms/ScrollViewContainer";
 import { NavigationScreenProps } from "../../../rootTypeList";
 
-export const Favorite = ({
+export const Settings = ({
   navigation,
-}: NavigationScreenProps<SCREEN.Favorite>): JSX => {
+}: NavigationScreenProps<SCREEN.Settings>): JSX => {
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
 
-  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
+  const onPressGoBack = () => navigation.goBack();
 
   useEffect(() => {
     setIsContentLoaded(true);
@@ -24,10 +24,10 @@ export const Favorite = ({
   return (
     <Screen styleOfStatusBar="dark">
       <Header
-        isSettingsIconActive={false}
+        isSettingsIconActive
         isUserShow={false}
-        screenName={SCREEN.Favorite}
-        onPressGoToSettings={onPressGoToSettings}
+        screenName={SCREEN.Settings}
+        onPressGoToSettings={onPressGoBack}
       />
       <ScrollViewContainer>
         {isContentLoaded ? (
@@ -40,15 +40,13 @@ export const Favorite = ({
               alignContent: "center",
             }}
           >
-            <Text style={{ margin: 10 }}>
-              Welcome it's {SCREEN.Favorite} screen
-            </Text>
-            <FontAwesome5
+            <Text style={{ margin: 10, fontSize: 28 }}>Settings</Text>
+            {/* <FontAwesome5
               name="user-clock"
               size={32}
               style={{ margin: 10 }}
               color={COLORS.orange}
-            />
+            /> */}
           </View>
         ) : (
           <View

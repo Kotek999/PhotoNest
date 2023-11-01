@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Favorite: undefined;
   Find: undefined;
   Profile: undefined;
+  Settings: undefined;
 };
 
 export type NavigationScreenProps<T extends keyof RootStackParamList> = {

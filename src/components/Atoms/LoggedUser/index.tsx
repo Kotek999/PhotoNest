@@ -7,17 +7,15 @@ import { COLORS } from "../../../colors";
 export const LoggedUser = (props: LoggedUserProps): JSX => {
   return (
     <View>
-      {!props.isUserVisible ? (
+      {!props.isUserVisible && (
         <View style={styles.userContainer}>
           <Text style={styles.loggedUserValue}>
-            Logged in as{" "}
+            Hello {""}
             <Text style={styles.userNameValue}>
               {props.displayName as Children}
             </Text>
           </Text>
         </View>
-      ) : (
-        <Text style={styles.statusValue}>Online</Text>
       )}
     </View>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import textData from "../../../../textData.json";
 import { StyleSheet } from "react-native";
 import { View } from "react-native-ui-lib";
 import { JSX, PhotoContentProps } from "../../../types";
@@ -19,7 +20,11 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
                 {props.isPhotosLoaded ? (
                   <View style={styles.container}>
                     {props.photos.length === 0 ? (
-                      <PhotoWarning title="No photos to display" />
+                      <PhotoWarning
+                        title={
+                          textData.value.photo.title.warning.photosNotExist
+                        }
+                      />
                     ) : (
                       <RenderAddedPhotos
                         displayName={props.displayName}
@@ -34,7 +39,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
             ) : (
               <PhotoWarning
                 isPermissionRequest={props.isPermissionRequest}
-                title="You have denied access to galleries and photos. To continue, grant access in the settings."
+                title={textData.value.photo.title.warning.permissionDenied}
               />
             )}
           </View>

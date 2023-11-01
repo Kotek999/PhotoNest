@@ -22,6 +22,8 @@ export const Profile = ({
 
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
 
+  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
+
   const onPressSignOut = () => {
     dispatch(signOut({ redirect: navigation.navigate }));
     showToast({ message: "Correct Logout", duration: ToastAndroid.SHORT });
@@ -34,9 +36,10 @@ export const Profile = ({
   return (
     <Screen styleOfStatusBar="dark">
       <Header
+        isSettingsIconActive={false}
         isUserShow={false}
         screenName={SCREEN.Profile}
-        onPress={() => alert("go to settings")}
+        onPressGoToSettings={onPressGoToSettings}
       />
       <ScrollViewContainer>
         {isContentLoaded ? (

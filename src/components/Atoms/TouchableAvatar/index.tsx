@@ -1,19 +1,48 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { Avatar } from "react-native-ui-lib";
-import { JSX, TouchableAvatarProps } from "../../../types";
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { View, Avatar } from "react-native-ui-lib";
+import { JSX, LoggedUserProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { getFirstLetter } from "../../../helpers/functions/getFirstLetter";
 
-export const TouchableAvatar = (props: TouchableAvatarProps): JSX => {
+export const TouchableAvatar = (props: LoggedUserProps): JSX => {
   return (
-    <TouchableOpacity onPress={props.showLoggedUser}>
+    <TouchableOpacity onPress={props.onPressGoToProfile}>
       <Avatar
         label={getFirstLetter(props.displayName as string)}
         labelColor="white"
         size={28}
-        backgroundColor={COLORS.orange}
+        backgroundColor={COLORS.darkOpacity}
       />
+      <View
+        style={{
+          ...styles.badge,
+          width: 9,
+          height: 9,
+          backgroundColor: COLORS.lightGrayBg,
+        }}
+      >
+        <View
+          style={{
+            ...styles.badge,
+            width: 8,
+            height: 8,
+            backgroundColor: COLORS.lightGreen,
+          }}
+        ></View>
+      </View>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  badge: {
+    flex: 1,
+    bottom: 0,
+    right: 0,
+    borderRadius: 100,
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

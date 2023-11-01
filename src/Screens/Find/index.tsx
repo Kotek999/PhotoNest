@@ -8,9 +8,14 @@ import { COLORS } from "../../colors";
 import { Header } from "../../components/Molecules/Header";
 import { SCREEN } from "../../../routes";
 import { ScrollViewContainer } from "../../components/Atoms/ScrollViewContainer";
+import { NavigationScreenProps } from "../../../rootTypeList";
 
-export const Find = (): JSX => {
+export const Find = ({
+  navigation,
+}: NavigationScreenProps<SCREEN.Find>): JSX => {
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
+
+  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
 
   useEffect(() => {
     setIsContentLoaded(true);
@@ -19,9 +24,10 @@ export const Find = (): JSX => {
   return (
     <Screen styleOfStatusBar="dark">
       <Header
+        isSettingsIconActive={false}
         isUserShow={false}
         screenName={SCREEN.Find}
-        onPress={() => alert("go to settings")}
+        onPressGoToSettings={onPressGoToSettings}
       />
       <ScrollViewContainer>
         {isContentLoaded ? (

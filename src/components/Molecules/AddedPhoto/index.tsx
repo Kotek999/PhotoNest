@@ -1,4 +1,5 @@
 import React from "react";
+import textData from "../../../../textData.json";
 import { StyleSheet } from "react-native";
 import { View, Dash } from "react-native-ui-lib";
 import { JSX, AddedPhotoProps } from "../../../types";
@@ -12,11 +13,13 @@ export const AddedPhoto = (props: AddedPhotoProps): JSX => {
     <View>
       {props.uri ? (
         <View style={styles.container}>
-          <PhotoMessage title="You added photo right now" />
+          <PhotoMessage title={textData.value.photo.title.message.photoAdded} />
           <Photo uri={props.uri} />
         </View>
       ) : (
-        <PhotoMessage title="You haven't added any photos today" />
+        <PhotoMessage
+          title={textData.value.photo.title.message.photoNotAdded}
+        />
       )}
       <Dash
         vertical

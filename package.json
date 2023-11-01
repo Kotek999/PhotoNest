@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "crypto-es": "^2.0.4",
     "expo": "~49.0.8",
+    "expo-blur": "~12.4.1",
     "expo-file-system": "~15.4.4",
     "expo-image-picker": "~14.3.2",
     "expo-media-library": "~15.4.1",

@@ -8,6 +8,8 @@ import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
 import { PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
+import { NavigationScreenProps } from "../rootTypeList";
+import { SCREEN } from "../routes";
 
 export type Children = ReactNode;
 export type JSX = React.JSX.Element;
@@ -33,11 +35,26 @@ export type SubmitButtonProps = {
   label: string;
 };
 
+type Key = string | number;
+
+type ReactElement<
+  P = any,
+  T extends string | React.JSXElementConstructor<any> =
+    | string
+    | React.JSXElementConstructor<any>
+> = {
+  type: T;
+  props: P;
+  key: Key | null;
+};
+
 type InputProps = {
   value: string;
   placeholder: string;
   secureTextEntry?: boolean;
   onChangeText: OnChangeText | void;
+  leadingAccessory?: ReactElement;
+  trailingAccessory?: ReactElement;
 };
 
 export type TextInputProps = InputProps & {
@@ -74,6 +91,7 @@ export type Colors = {
   redError: string;
   grayItemMenu: string;
   lightGrayBg: string;
+  lightGreen: string;
 };
 
 export type ButtonsBoxProps = {
@@ -220,17 +238,11 @@ export type HashedValue = {
 export type BottomTabBarIconProps = {
   isFocused: boolean;
   iconName: string;
-  iconTitle: string;
 };
-
-type GestureEvent = (event: GestureResponderEvent | undefined) => void;
 
 type LoggedUserDisplayName = {
   displayName?: UserDataInfo;
-};
-
-type LoggedUserShow = {
-  showLoggedUser?: GestureEvent;
+  onPressGoToProfile?: OnPress;
 };
 
 type LoggedUserVisible = {
@@ -239,13 +251,17 @@ type LoggedUserVisible = {
 
 export type LoggedUserProps = LoggedUserVisible & LoggedUserDisplayName;
 
-export type LoggedUserWithAvatarProps = LoggedUserShow & LoggedUserProps;
+export type LoggedUserWithAvatarProps = LoggedUserProps;
 
-export type TouchableAvatarProps = LoggedUserShow & LoggedUserDisplayName;
+export type TouchableAvatarProps = LoggedUserDisplayName;
 
-export type HeaderProps = LoggedUserWithAvatarProps & {
-  onPress: OnPress;
+export type HeaderProps = {
+  onPressGoToProfile?: OnPress;
+  onPressGoToSettings: OnPress;
+  displayName?: UserDataInfo;
+  isUserVisible?: boolean;
   isUserShow: boolean;
+  isSettingsIconActive: boolean;
   screenName?: string;
 };
 
@@ -287,6 +303,7 @@ export type PhotoInfoProps = {
 export type RefreshProps = {
   setRefreshing: SetState<boolean>;
   getPhotos: () => void;
+  showLoggedUser: () => void;
 };
 
 export type AddPhotoButtonProps = {
@@ -318,4 +335,30 @@ export type PhotoContentProps = {
   photos: ImageAssetsData[];
   displayName: UserDataInfo;
   isPermissionRequest: boolean;
+};
+
+export type LeadingIconProps = {
+  name: string;
+};
+
+export type AuthProps = {
+  isLoading: boolean;
+  email: string;
+  setEmail: SetState<string>;
+  password: string;
+  setPassword: SetState<string>;
+  onPressLogin?: OnPress;
+  onPressSignUp?: OnPress;
+  onPressGoToSignUp?: OnPress;
+  onPressGoToLogin?: OnPress;
+};
+
+export type SignUpContentProps = AuthProps & {
+  nick: string;
+  setNick: SetState<string>;
+};
+
+export type TrailingEyeIconProps = {
+  setShowPassword: SetState<boolean>;
+  showPassword: boolean;
 };

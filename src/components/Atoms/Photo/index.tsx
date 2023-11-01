@@ -10,6 +10,7 @@ export const Photo = (props: PhotoProps): JSX => {
       style={{ ...styles.image, marginBottom: props.mb }}
       resizeMode="cover"
       resizeMethod="scale"
+      alt="photo"
     />
   );
 };

@@ -17,8 +17,11 @@ import { useRefresh } from "../../helpers/functions/useRefresh";
 import { AddPhotoButton } from "../../components/Atoms/AddPhotoButton";
 import { PhotoContent } from "../../components/Organisms/PhotoContent";
 import { COLORS } from "../../colors";
+import { NavigationScreenProps } from "../../../rootTypeList";
 
-export const Gallery = (): JSX => {
+export const Gallery = ({
+  navigation,
+}: NavigationScreenProps<SCREEN.Gallery>): JSX => {
   const dispatch = useDispatch();
 
   const [displayName, setDisplayName] = useState<UserDataInfo>("");
@@ -35,6 +38,9 @@ export const Gallery = (): JSX => {
 
   const [addedPhoto, setAddedPhoto] = useState<string>("");
   const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
+  const onPressGoToProfile = () => navigation.navigate(SCREEN.Profile);
 
   const addPhoto = () =>
     getPhotoInfo({
@@ -54,7 +60,7 @@ export const Gallery = (): JSX => {
     getPhotosFromFirebase(setPhotos, setIsPhotosLoaded);
   };
 
-  const onRefresh = useRefresh({ setRefreshing, getPhotos });
+  const onRefresh = useRefresh({ setRefreshing, getPhotos, showLoggedUser });
 
   useEffect(() => {
     getPhotos();
@@ -65,9 +71,6 @@ export const Gallery = (): JSX => {
     if (displayName) {
       showLoggedUser();
     }
-    setTimeout(() => {
-      showLoggedUser();
-    }, 3000);
     getMediaPermissionRequest(setMediaPermission);
     setIsContentLoaded(true);
   }, [photos]);
@@ -76,11 +79,12 @@ export const Gallery = (): JSX => {
     <Screen styleOfStatusBar="dark">
       <Header
         isUserShow
+        isSettingsIconActive={false}
         screenName={SCREEN.Gallery}
-        showLoggedUser={showLoggedUser}
         isUserVisible={isUserVisible}
         displayName={displayName}
-        onPress={() => alert("go to settings")}
+        onPressGoToProfile={onPressGoToProfile}
+        onPressGoToSettings={onPressGoToSettings}
       />
       <ScrollViewContainer
         refreshControl={

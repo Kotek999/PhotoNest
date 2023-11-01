@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View, Text } from "react-native-ui-lib";
 import { JSX, HeaderProps } from "../../../types";
@@ -17,17 +17,18 @@ export const Header = (props: HeaderProps): JSX => {
           <LoggedUserWithAvatar
             displayName={props.displayName}
             isUserVisible={props.isUserVisible}
-            showLoggedUser={props.showLoggedUser}
+            onPressGoToProfile={props.onPressGoToProfile}
           />
         ) : (
           <Text style={styles.value}>{props.screenName}</Text>
         )}
-        <Ionicons
-          name="settings-outline"
-          size={28}
-          color={COLORS.orange}
-          onPress={props.onPress}
-        />
+        <TouchableOpacity onPress={props.onPressGoToSettings}>
+          {props.isSettingsIconActive ? (
+            <Ionicons name="settings" size={28} color={COLORS.orange} />
+          ) : (
+            <Ionicons name="settings-outline" size={28} color={COLORS.orange} />
+          )}
+        </TouchableOpacity>
       </View>
     </View>
   );

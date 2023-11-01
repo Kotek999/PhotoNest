@@ -18,7 +18,7 @@ export const Welcome = ({
   useFocusEffect(backHandlerCall());
 
   return (
-    <Screen>
+    <Screen styleOfStatusBar="light">
       <Background>
         <Slogan />
         <ButtonsBox

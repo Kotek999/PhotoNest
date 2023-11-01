@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { View } from "react-native-ui-lib";
+import { View, Avatar } from "react-native-ui-lib";
 import { JSX, LoggedUserWithAvatarProps } from "../../../types";
-import { LoginSpinner } from "../../../components/Atoms/LoginSpinner";
 import { LoggedUser } from "../../../components/Atoms/LoggedUser";
 import { TouchableAvatar } from "../../../components/Atoms/TouchableAvatar";
 
@@ -13,8 +12,8 @@ export const LoggedUserWithAvatar = (props: LoggedUserWithAvatarProps): JSX => {
         <View style={styles.mainContainer}>
           <View style={styles.container}>
             <TouchableAvatar
-              showLoggedUser={props.showLoggedUser}
               displayName={props.displayName}
+              onPressGoToProfile={props.onPressGoToProfile}
             />
             <LoggedUser
               isUserVisible={props.isUserVisible}
@@ -23,7 +22,7 @@ export const LoggedUserWithAvatar = (props: LoggedUserWithAvatarProps): JSX => {
           </View>
         </View>
       ) : (
-        <LoginSpinner />
+        <Avatar size={28} backgroundColor="#E0E0E0" />
       )}
     </View>
   );

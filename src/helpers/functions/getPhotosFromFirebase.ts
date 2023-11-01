@@ -1,3 +1,4 @@
+import textData from "../../../textData.json";
 import { ImageAssetsData, SetState } from "../../types";
 import { ref, onValue, DataSnapshot } from "firebase/database";
 import { db } from "../../../FirebaseConfig";
@@ -6,7 +7,7 @@ export const getPhotosFromFirebase = async (
   setImages: SetState<ImageAssetsData[]>,
   setImagesLoaded: SetState<boolean>
 ) => {
-  const uniqueKeysRef = ref(db, `public/photos`);
+  const uniqueKeysRef = ref(db, textData.value.firebase.photoKeyRef);
 
   try {
     const snapshot: DataSnapshot = await new Promise((resolve, reject) => {
@@ -18,7 +19,10 @@ export const getPhotosFromFirebase = async (
       const imagesArray: ImageAssetsData[] = [];
 
       for (const key of uniqueKeys) {
-        const contentRef = ref(db, `public/photos/${key}/photo`);
+        const contentRef = ref(
+          db,
+          `${textData.value.firebase.photoContentRef}${key}${textData.value.firebase.photoPath}`
+        );
         const contentSnapshot: DataSnapshot = await new Promise(
           (resolve, reject) => {
             onValue(contentRef, resolve, reject);
@@ -35,6 +39,6 @@ export const getPhotosFromFirebase = async (
       setImagesLoaded(true);
     }
   } catch (error) {
-    console.error("Error while reading data:", error);
+    console.error(textData.value.firebase.error.readingData, error);
   }
 };

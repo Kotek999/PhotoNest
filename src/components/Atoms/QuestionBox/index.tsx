@@ -27,9 +27,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   mainValue: {
+    fontFamily: "Open-Sans",
+    letterSpacing: 0.5,
     color: COLORS.white,
   },
   value: {
+    fontFamily: "Open-Sans",
+    letterSpacing: 0.5,
     color: COLORS.emerald,
   },
 });

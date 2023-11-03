@@ -60,7 +60,7 @@ export const Profile = ({
               name="user-clock"
               size={32}
               style={{ margin: 10 }}
-              color={COLORS.orange}
+              color={COLORS.emerald}
             />
           </View>
         ) : (
@@ -73,7 +73,7 @@ export const Profile = ({
               alignContent: "center",
             }}
           >
-            <ActivityIndicator size="large" color={COLORS.orange} />
+            <ActivityIndicator size="large" color={COLORS.emerald} />
           </View>
         )}
       </ScrollViewContainer>

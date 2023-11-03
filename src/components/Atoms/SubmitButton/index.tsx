@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   label: {
-    letterSpacing: 1.2,
+    fontFamily: "Open-Sans",
+    letterSpacing: 0.5,
     fontSize: 20,
     fontWeight: "700",
   },

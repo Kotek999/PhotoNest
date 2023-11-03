@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Incubator, Text } from "react-native-ui-lib";
-import { JSX, TextInputProps } from "../../../types";
+import { Incubator } from "react-native-ui-lib";
+import { JSX, TextInputProps, ChangeText } from "../../../types";
 import { COLORS } from "../../../colors";
 
 export const TextInput = (props: TextInputProps): JSX => {
@@ -16,7 +16,7 @@ export const TextInput = (props: TextInputProps): JSX => {
       color={COLORS.blackText}
       secureTextEntry={props.secureTextEntry}
       value={props.value}
-      onChangeText={props.onChangeText as ((text: string) => void) | undefined}
+      onChangeText={props.onChangeText as ChangeText}
     />
   );
 };

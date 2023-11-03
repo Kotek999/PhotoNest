@@ -367,3 +367,5 @@ export type TrailingEyeIconProps = {
   setShowPassword: SetState<boolean>;
   showPassword: boolean;
 };
+
+export type ChangeText = ((text: string) => void) | undefined;

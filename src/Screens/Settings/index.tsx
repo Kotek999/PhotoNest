@@ -58,7 +58,7 @@ export const Settings = ({
               alignContent: "center",
             }}
           >
-            <ActivityIndicator size="large" color={COLORS.orange} />
+            <ActivityIndicator size="large" color={COLORS.emerald} />
           </View>
         )}
       </ScrollViewContainer>

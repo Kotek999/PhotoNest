@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   value: {
+    fontFamily: "Open-Sans",
     flex: 1,
     textAlign: "left",
     marginLeft: 6,
     fontSize: 14,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
     color: COLORS.sunsetOrange,
   },
 });

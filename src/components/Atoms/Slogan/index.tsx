@@ -25,17 +25,20 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   firstValue: {
+    fontFamily: "Open-Sans",
     textAlign: "center",
     padding: 10,
     width: screenWidth,
     backgroundColor: COLORS.darkOpacity,
     color: COLORS.white,
     fontSize: 30,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
     fontWeight: "500",
   },
   secondValue: {
+    fontFamily: "Open-Sans",
     fontWeight: "700",
     color: COLORS.emerald,
+    letterSpacing: 0.5,
   },
 });

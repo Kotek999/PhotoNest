@@ -10,8 +10,10 @@ export const ScreenName = (props: ScreenNameProps): JSX => {
 
 const styles = StyleSheet.create({
   value: {
+    fontFamily: "Open-Sans",
     fontSize: 30,
     fontWeight: "bold",
     color: COLORS.white,
+    letterSpacing: 0.5,
   },
 });

@@ -26,15 +26,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   loggedUserValue: {
+    fontFamily: "Open-Sans",
     color: COLORS.white,
     fontSize: 18,
     marginLeft: 10,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   },
   userNameValue: {
+    fontFamily: "Open-Sans",
     color: COLORS.emerald,
     fontWeight: "bold",
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   },
   statusValue: {
     color: COLORS.darkOpacity,

@@ -16,7 +16,7 @@ import { counterSlice } from "../../redux/counter/action";
 export const Test = ({ navigation }: NavigationScreenProps<SCREEN.Test>) => {
   const counter = useSelector((state: { counter: number }) => state.counter);
   const dispatch = useDispatch();
-  const source: ImageSourcePropType = require("../../assets/newBg.png");
+  const source: ImageSourcePropType = require("../../assets/images/newBg.png");
 
   return (
     <Screen styleOfStatusBar="dark">

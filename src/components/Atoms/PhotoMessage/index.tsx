@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   value: {
+    fontFamily: "Open-Sans",
     color: COLORS.white,
     fontSize: 14,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   },
 });

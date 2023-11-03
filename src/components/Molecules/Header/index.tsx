@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   value: {
+    fontFamily: "Open-Sans",
     color: COLORS.white,
     fontSize: 20,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   },
 });

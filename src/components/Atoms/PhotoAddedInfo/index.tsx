@@ -52,9 +52,10 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   value: {
+    fontFamily: "Open-Sans",
     width: "100%",
     color: COLORS.white,
     fontSize: 14,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   },
 });

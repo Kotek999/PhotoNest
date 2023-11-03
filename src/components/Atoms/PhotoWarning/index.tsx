@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   value: {
-    color: COLORS.darkOpacity,
+    color: COLORS.white,
     textAlign: "center",
     fontSize: 16,
     letterSpacing: 1.1,

@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   },
   secondValue: {
     fontWeight: "700",
-    color: COLORS.orange,
+    color: COLORS.emerald,
   },
 });

@@ -22,7 +22,7 @@ export const Find = ({
   }, []);
 
   return (
-    <Screen styleOfStatusBar="dark">
+    <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
         isSettingsIconActive={false}
         isUserShow={false}
@@ -40,7 +40,7 @@ export const Find = ({
               alignContent: "center",
             }}
           >
-            <Text style={{ margin: 10 }}>
+            <Text style={{ margin: 10, color: COLORS.white }}>
               Welcome it's {SCREEN.Find} screen
             </Text>
             <FontAwesome5

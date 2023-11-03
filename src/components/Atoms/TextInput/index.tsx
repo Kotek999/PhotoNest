@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     width: "90%",
     justifyContent: "center",
     marginVertical: 4,
-    backgroundColor: COLORS.grayField,
+    backgroundColor: COLORS.lightGrayInput,
     borderRadius: 10,
-    borderWidth: 1.2,
+    borderWidth: 3,
   },
 });

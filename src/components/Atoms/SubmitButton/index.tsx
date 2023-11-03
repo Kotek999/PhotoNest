@@ -19,7 +19,7 @@ export const SubmitButton = (props: SubmitButtonProps): JSX => {
 const styles = StyleSheet.create({
   container: {
     width: "90%",
-    backgroundColor: COLORS.orange,
+    backgroundColor: COLORS.emerald,
     borderRadius: 10,
     marginTop: 25,
   },

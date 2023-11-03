@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   value: {
     width: "100%",
-    color: COLORS.darkOpacity,
+    color: COLORS.white,
     fontSize: 14,
     letterSpacing: 1.1,
   },

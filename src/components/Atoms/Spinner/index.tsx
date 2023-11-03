@@ -9,7 +9,7 @@ import { screenHeight } from "../../../helpers/dimensions";
 export const Spinner = (): JSX => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={COLORS.orange} />
+      <ActivityIndicator size="large" color={COLORS.emerald} />
     </View>
   );
 };

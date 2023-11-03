@@ -1,13 +1,13 @@
 import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { StyleSheet } from "react-native";
-import { View, Text } from "react-native-ui-lib";
+import { View } from "react-native-ui-lib";
 import { JSX, BottomTabBarIconProps } from "../../types";
 import { COLORS } from "../../colors";
 
 export const createTabBarIcon = (props: BottomTabBarIconProps): JSX => {
   const colorOfItemsOnMenu = props.isFocused
-    ? COLORS.orange
+    ? COLORS.emerald
     : COLORS.grayItemMenu;
 
   return (

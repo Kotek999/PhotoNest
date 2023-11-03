@@ -24,7 +24,7 @@ export const AddPhotoButton = (props: AddPhotoButtonProps): JSX => {
             backgroundColor:
               permission === false || permission === null
                 ? COLORS.grayField
-                : COLORS.orange,
+                : COLORS.emerald,
           }}
         >
           <FontAwesome5 name="plus" size={20} color={COLORS.white} />

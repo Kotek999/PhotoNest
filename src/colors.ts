@@ -11,4 +11,8 @@ export const COLORS: Colors = {
   grayItemMenu: "#748c94",
   lightGrayBg: "#EEEEEE",
   lightGreen: "#93faa5",
+  purpleBg: "#392e4a",
+  sunsetOrange: "#f64747",
+  emerald: "#3fc380",
+  lightGrayInput: "#dadfe1",
 };

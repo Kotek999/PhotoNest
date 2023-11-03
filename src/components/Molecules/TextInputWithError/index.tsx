@@ -23,7 +23,7 @@ export const TextInputWithError = (props: TextInputWithErrorProps): JSX => {
           props.secondErrorValue ||
           props.thirdErrorValue ||
           props.fourthErrorValue
-            ? COLORS.redError
+            ? COLORS.sunsetOrange
             : COLORS.blank
         }
         secureTextEntry={props.secureTextEntry}

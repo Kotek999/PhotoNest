@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingTop: 20,
     alignSelf: "center",
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.purpleBg,
     width: screenWidth,
     height: screenHeight,
     borderTopLeftRadius: 50,

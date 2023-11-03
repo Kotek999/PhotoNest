@@ -10,7 +10,7 @@ export const TouchableAvatar = (props: LoggedUserProps): JSX => {
     <TouchableOpacity onPress={props.onPressGoToProfile}>
       <Avatar
         label={getFirstLetter(props.displayName as string)}
-        labelColor="white"
+        labelColor={COLORS.white}
         size={28}
         backgroundColor={COLORS.darkOpacity}
       />
@@ -19,7 +19,7 @@ export const TouchableAvatar = (props: LoggedUserProps): JSX => {
           ...styles.badge,
           width: 9,
           height: 9,
-          backgroundColor: COLORS.lightGrayBg,
+          backgroundColor: COLORS.purpleBg,
         }}
       >
         <View

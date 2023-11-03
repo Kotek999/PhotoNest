@@ -28,6 +28,7 @@ export type ChildProps = {
         string | React.JSXElementConstructor<any>
       >
     | undefined;
+  bgColor?: string;
 };
 
 export type SubmitButtonProps = {
@@ -92,6 +93,10 @@ export type Colors = {
   grayItemMenu: string;
   lightGrayBg: string;
   lightGreen: string;
+  purpleBg: string;
+  sunsetOrange: string;
+  emerald: string;
+  lightGrayInput: string;
 };
 
 export type ButtonsBoxProps = {

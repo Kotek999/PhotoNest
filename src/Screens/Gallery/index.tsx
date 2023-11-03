@@ -76,7 +76,7 @@ export const Gallery = ({
   }, [photos]);
 
   return (
-    <Screen styleOfStatusBar="dark">
+    <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
         isUserShow
         isSettingsIconActive={false}
@@ -91,8 +91,9 @@ export const Gallery = ({
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor={COLORS.orange}
-            colors={[COLORS.orange]}
+            tintColor={COLORS.emerald}
+            colors={[COLORS.emerald]}
+            progressBackgroundColor={COLORS.purpleBg}
           />
         }
       >

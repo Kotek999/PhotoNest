@@ -11,7 +11,7 @@ export const ScrollViewContainer = (props: ScrollViewContainerProps): JSX => {
       contentContainerStyle={{
         flexGrow: 1,
         bottom: 0,
-        backgroundColor: COLORS.white,
+        backgroundColor: COLORS.purpleBg,
       }}
       showsVerticalScrollIndicator={false}
       refreshControl={props.refreshControl}

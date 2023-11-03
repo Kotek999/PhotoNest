@@ -22,7 +22,7 @@ export const Settings = ({
   }, []);
 
   return (
-    <Screen styleOfStatusBar="dark">
+    <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
         isSettingsIconActive
         isUserShow={false}
@@ -40,7 +40,7 @@ export const Settings = ({
               alignContent: "center",
             }}
           >
-            <Text style={{ margin: 10, fontSize: 28 }}>Settings</Text>
+            <Text style={{ margin: 10, fontSize: 28, color: COLORS.white }}>Settings</Text>
             {/* <FontAwesome5
               name="user-clock"
               size={32}

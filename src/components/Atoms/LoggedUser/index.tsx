@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   loggedUserValue: {
-    color: COLORS.darkOpacity,
+    color: COLORS.white,
     fontSize: 18,
     marginLeft: 10,
     letterSpacing: 1.1,
   },
   userNameValue: {
-    color: COLORS.orange,
+    color: COLORS.emerald,
     fontWeight: "bold",
     letterSpacing: 1.1,
   },

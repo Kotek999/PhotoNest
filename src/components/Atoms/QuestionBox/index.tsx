@@ -7,7 +7,7 @@ import { COLORS } from "../../../colors";
 export const QuestionBox = (props: QuestionBoxProps): JSX => {
   return (
     <View style={styles.mainContainer}>
-      <Text>{props.title}</Text>
+      <Text style={styles.mainValue}>{props.title}</Text>
       <View style={styles.container}>
         <TouchableOpacity onPress={props.onPress}>
           <Text style={styles.value}>{props.goTo}</Text>
@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: 5,
   },
+  mainValue: {
+    color: COLORS.white,
+  },
   value: {
-    color: COLORS.orange,
+    color: COLORS.emerald,
   },
 });

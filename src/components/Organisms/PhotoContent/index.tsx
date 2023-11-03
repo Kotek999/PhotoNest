@@ -7,6 +7,7 @@ import { AddedPhoto } from "../../../components/Molecules/AddedPhoto";
 import { PhotoWarning } from "../../../components/Atoms/PhotoWarning";
 import { Spinner } from "../../../components/Atoms/Spinner";
 import { RenderAddedPhotos } from "../../../components/Molecules/RenderAddedPhotos";
+import { COLORS } from "../../../colors";
 
 export const PhotoContent = (props: PhotoContentProps): JSX => {
   return (
@@ -15,7 +16,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
         <View>
           <View>
             {!props.mediaPermission === false ? (
-              <View>
+              <View style={styles.mainContainer}>
                 <AddedPhoto uri={props.addedPhoto} />
                 {props.isPhotosLoaded ? (
                   <View style={styles.container}>
@@ -52,6 +53,9 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: COLORS.purpleBg,
+  },
   container: {
     flex: 1,
     flexDirection: "column",
@@ -59,5 +63,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     alignSelf: "center",
+    backgroundColor: COLORS.purpleBg,
   },
 });

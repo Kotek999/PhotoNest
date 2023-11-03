@@ -1,7 +1,7 @@
 import React from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { JSX } from "../../../types";
-import { screenHeight, screenWidth } from "../../../helpers/dimensions";
+import { screenWidth } from "../../../helpers/dimensions";
 import { COLORS } from "../../../colors";
 import { BlurView } from "expo-blur";
 
@@ -13,10 +13,9 @@ export const BlurSpinner = (): JSX => {
           ...styles.resolutionContainer,
           ...styles.container,
         }}
-        tint="light"
-        intensity={100}
+        intensity={0}
       >
-        <ActivityIndicator size="large" color={COLORS.orange} />
+        <ActivityIndicator size="large" color={COLORS.emerald} />
       </BlurView>
     </View>
   );
@@ -24,8 +23,8 @@ export const BlurSpinner = (): JSX => {
 
 const styles = StyleSheet.create({
   resolutionContainer: {
+    flex: 1,
     width: screenWidth,
-    height: screenHeight,
   },
   container: {
     flexDirection: "row",

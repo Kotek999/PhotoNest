@@ -23,8 +23,8 @@ export const AddedPhoto = (props: AddedPhotoProps): JSX => {
       )}
       <Dash
         vertical
-        length={5}
-        color={COLORS.lightGrayBg}
+        length={2}
+        color={COLORS.grayItemMenu}
         thickness={screenWidth}
       />
     </View>

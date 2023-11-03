@@ -9,6 +9,7 @@ import { View } from "react-native-ui-lib";
 import { JSX, ChildProps as ImageTemplateProps } from "../../../types";
 import { loginSignUpImg as source } from "../../../helpers/imageRequirements";
 import { screenHeight, screenWidth } from "../../../helpers/dimensions";
+import { COLORS } from "../../../colors";
 
 export const ImageTemplate = (props: ImageTemplateProps): JSX => {
   return (
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: COLORS.purpleBg,
     borderTopLeftRadius: 50,
   },
 });

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   value: {
-    color: COLORS.darkOpacity,
+    color: COLORS.white,
     fontSize: 14,
     letterSpacing: 1.1,
   },

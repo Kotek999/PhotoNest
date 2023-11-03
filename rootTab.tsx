@@ -83,7 +83,7 @@ export const RootTab = (): JSX => {
 const styles = StyleSheet.create({
   screenContainer: {
     position: "absolute",
-    backgroundColor: COLORS.lightGrayBg,
+    backgroundColor: COLORS.purpleBg,
   },
   shadow: {
     shadowColor: COLORS.darkOpacity,

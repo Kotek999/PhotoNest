@@ -34,7 +34,7 @@ export const Profile = ({
   }, []);
 
   return (
-    <Screen styleOfStatusBar="dark">
+    <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
         isSettingsIconActive={false}
         isUserShow={false}
@@ -52,7 +52,7 @@ export const Profile = ({
               alignContent: "center",
             }}
           >
-            <Text style={{ margin: 10 }}>
+            <Text style={{ margin: 10, color: COLORS.white }}>
               Welcome it's {SCREEN.Profile} screen
             </Text>
             <Button title="Sign Out" onPress={onPressSignOut} />

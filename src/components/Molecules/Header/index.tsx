@@ -24,9 +24,13 @@ export const Header = (props: HeaderProps): JSX => {
         )}
         <TouchableOpacity onPress={props.onPressGoToSettings}>
           {props.isSettingsIconActive ? (
-            <Ionicons name="settings" size={28} color={COLORS.orange} />
+            <Ionicons name="settings" size={28} color={COLORS.emerald} />
           ) : (
-            <Ionicons name="settings-outline" size={28} color={COLORS.orange} />
+            <Ionicons
+              name="settings-outline"
+              size={28}
+              color={COLORS.emerald}
+            />
           )}
         </TouchableOpacity>
       </View>
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
-    backgroundColor: COLORS.lightGrayBg,
+    backgroundColor: COLORS.purpleBg,
   },
   container: {
     flex: 1,
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   value: {
-    color: COLORS.darkOpacity,
+    color: COLORS.white,
     fontSize: 20,
     letterSpacing: 1.1,
   },

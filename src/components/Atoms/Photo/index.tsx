@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   image: {
     flexGrow: 1,
     alignSelf: "center",
-    width: screenWidth,
+    width: screenWidth - 20,
     height: "100%",
+    borderRadius: 16,
   },
 });

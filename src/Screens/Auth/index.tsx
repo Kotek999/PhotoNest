@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { getAuthToken } from "../../redux/auth/authToken/action";
 import { Background } from "../../components/Atoms/Background";
 import { Spinner } from "../../components/Atoms/Spinner";
+import { Screen } from "../../components/Atoms/Screen";
 
 export const Auth = ({
   navigation,
@@ -19,11 +20,13 @@ export const Auth = ({
   }, [dispatch]);
 
   return (
-    <Background>
-      <View style={styles.container}>
-        <Spinner />
-      </View>
-    </Background>
+    <Screen styleOfStatusBar="light">
+      <Background>
+        <View style={styles.container}>
+          <Spinner isFlex={false} />
+        </View>
+      </Background>
+    </Screen>
   );
 };
 

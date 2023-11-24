@@ -6,9 +6,13 @@ import { JSX } from "../../../types";
 import { COLORS } from "../../../colors";
 import { screenHeight } from "../../../helpers/dimensions";
 
-export const Spinner = (): JSX => {
+type SpinnerProps = {
+  isFlex: boolean;
+};
+
+export const Spinner = (props: SpinnerProps): JSX => {
   return (
-    <View style={styles.container}>
+    <View style={props.isFlex ? styles.flexContainer : styles.container}>
       <ActivityIndicator size="large" color={COLORS.emerald} />
     </View>
   );
@@ -16,6 +20,13 @@ export const Spinner = (): JSX => {
 const styles = StyleSheet.create({
   container: {
     height: screenHeight / 1.4,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
+  flexContainer: {
+    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

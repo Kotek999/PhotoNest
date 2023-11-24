@@ -4,12 +4,17 @@ import { savePhoto, savePhotoSuccess, savePhotoFailure } from "./action";
 import { ref, set, push } from "firebase/database";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { auth, db } from "../../../FirebaseConfig";
-import { ImageAssets } from "../../types";
+import { ImageAssets, DateInfo } from "../../types";
 import { generateUniqueValues } from "../../helpers/functions/generateUniqueValues";
 
 function* onSavePhoto(action: PayloadAction<ImageAssets>) {
   try {
     const { assets } = action.payload;
+
+    const dateAsset: DateInfo = {
+      date: assets[0].createdAt.date,
+      time: assets[0].createdAt.time,
+    };
 
     const setAllPhotos = set(
       ref(
@@ -22,10 +27,7 @@ function* onSavePhoto(action: PayloadAction<ImageAssets>) {
         photo: {
           directUrl: assets[0].directUrl,
           addedBy: assets[0].addedBy,
-          createdAt: {
-            date: assets[0].createdAt.date,
-            time: assets[0].createdAt.time,
-          },
+          createdAt: dateAsset,
           type: assets[0].type,
         },
       }
@@ -38,6 +40,7 @@ function* onSavePhoto(action: PayloadAction<ImageAssets>) {
       ),
       assets && {
         directUrl: assets[0].directUrl,
+        createdAt: dateAsset,
       }
     );
 

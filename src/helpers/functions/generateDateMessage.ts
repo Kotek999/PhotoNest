@@ -15,6 +15,8 @@ export const generateDateMessage = (
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
   const oneHourInMilliseconds = 60 * 60 * 1000;
 
+  const oneMonthInMilliseconds = oneDayInMilliseconds * 30;
+
   let dateDiffInMilliseconds = targetDate.getTime() - currentDate.getTime();
   const isFuture = dateDiffInMilliseconds < 0;
   dateDiffInMilliseconds = Math.abs(dateDiffInMilliseconds);
@@ -27,6 +29,7 @@ export const generateDateMessage = (
   const hour = textData.value.generally.dateMessages.time.hour;
   const day = textData.value.generally.dateMessages.time.day;
   const second = textData.value.generally.dateMessages.time.second;
+  const month = "month";
 
   if (dateDiffInMilliseconds < oneHourInMilliseconds) {
     const minutes = Math.floor(Math.abs(dateDiffInMilliseconds) / (60 * 1000));
@@ -40,12 +43,19 @@ export const generateDateMessage = (
     return `${addedText} ${hours} ${hours === 1 ? "" : ""}${hour}${
       hours === 1 ? "" : second
     } ${agoText}`;
-  } else {
+  } else if (dateDiffInMilliseconds < oneMonthInMilliseconds) {
     const days = Math.floor(
       Math.abs(dateDiffInMilliseconds) / oneDayInMilliseconds
     );
     return `${addedText} ${days} ${days === 1 ? "" : ""}${day}${
       days === 1 ? "" : second
+    } ${agoText}`;
+  } else {
+    const monts = Math.floor(
+      Math.abs(dateDiffInMilliseconds) / oneMonthInMilliseconds
+    );
+    return `${addedText} ${monts} ${monts === 1 ? "" : ""}${month}${
+      monts === 1 ? "" : second
     } ${agoText}`;
   }
 };

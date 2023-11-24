@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { RefreshControl } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import { JSX, UserDataInfo, ImageAssetsData } from "../../types";
+import { JSX, ImageAssetsData, UserDataFirebase } from "../../types";
 import { SCREEN } from "../../../routes";
 import { useDispatch } from "react-redux";
 import { backHandlerCall } from "../../helpers/functions/backHandlerCall";
-import { getUserDataFromFirebase } from "../../helpers/functions/getUserDataFromFirebase";
 import { Screen } from "../../components/Atoms/Screen";
 import { showCurrentLoggedUser } from "../../helpers/functions/showCurrentLoggedUser";
 import { Header } from "../../components/Molecules/Header";
@@ -18,13 +17,15 @@ import { AddPhotoButton } from "../../components/Atoms/AddPhotoButton";
 import { PhotoContent } from "../../components/Organisms/PhotoContent";
 import { COLORS } from "../../colors";
 import { NavigationScreenProps } from "../../../rootTypeList";
+import { getUserData } from "../../helpers/functions/getUserData";
 
 export const Gallery = ({
   navigation,
 }: NavigationScreenProps<SCREEN.Gallery>): JSX => {
   const dispatch = useDispatch();
 
-  const [displayName, setDisplayName] = useState<UserDataInfo>("");
+  const [userDataFirebase, setUserDataFirebase] = useState<UserDataFirebase>();
+
   const [isUserVisible, setUserVisible] = useState<boolean>(false);
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
 
@@ -44,7 +45,9 @@ export const Gallery = ({
 
   const addPhoto = () =>
     getPhotoInfo({
-      displayName,
+      setUserVisible,
+      isUserVisible,
+      userDataFirebase,
       setAddedPhoto,
       dispatch,
       setPhotos,
@@ -67,10 +70,8 @@ export const Gallery = ({
   }, []);
 
   useEffect(() => {
-    getUserDataFromFirebase(setDisplayName, "nickname");
-    if (displayName) {
-      showLoggedUser();
-    }
+    getUserData(setUserDataFirebase);
+    showLoggedUser();
     getMediaPermissionRequest(setMediaPermission);
     setIsContentLoaded(true);
   }, [photos]);
@@ -82,7 +83,7 @@ export const Gallery = ({
         isSettingsIconActive={false}
         screenName={SCREEN.Gallery}
         isUserVisible={isUserVisible}
-        displayName={displayName}
+        displayName={userDataFirebase?.nickname}
         onPressGoToProfile={onPressGoToProfile}
         onPressGoToSettings={onPressGoToSettings}
       />
@@ -104,7 +105,7 @@ export const Gallery = ({
           mediaPermission={mediaPermission}
           addedPhoto={addedPhoto}
           photos={photos}
-          displayName={displayName}
+          displayName={userDataFirebase?.nickname}
         />
       </ScrollViewContainer>
 

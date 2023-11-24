@@ -1,15 +1,9 @@
 import { ReactNode } from "react";
-import {
-  ToastAndroid,
-  GestureResponderEvent,
-  RefreshControlProps,
-} from "react-native";
+import { ToastAndroid, RefreshControlProps } from "react-native";
 import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
 import { PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
-import { NavigationScreenProps } from "../rootTypeList";
-import { SCREEN } from "../routes";
 
 export type Children = ReactNode;
 export type JSX = React.JSX.Element;
@@ -18,6 +12,10 @@ export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 type OnChangeText = (text: string) => void;
 
 export type OnPress = () => void;
+
+export type OnPressAction = {
+  onPress: OnPress;
+};
 
 export type ChildProps = {
   children: Children;
@@ -245,8 +243,10 @@ export type BottomTabBarIconProps = {
   iconName: string;
 };
 
+type UserDataFirebaseInfo = UserDataFirebase | string;
+
 type LoggedUserDisplayName = {
-  displayName?: UserDataInfo;
+  displayName?: UserDataFirebaseInfo;
   onPressGoToProfile?: OnPress;
 };
 
@@ -263,20 +263,20 @@ export type TouchableAvatarProps = LoggedUserDisplayName;
 export type HeaderProps = {
   onPressGoToProfile?: OnPress;
   onPressGoToSettings: OnPress;
-  displayName?: UserDataInfo;
+  displayName?: UserDataFirebaseInfo;
   isUserVisible?: boolean;
   isUserShow: boolean;
   isSettingsIconActive: boolean;
   screenName?: string;
 };
 
-type DateInfo = {
+export type DateInfo = {
   date: string;
   time: string;
 };
 
 export type PhotoAddedInfoProps = {
-  displayName: UserDataInfo;
+  displayName: UserDataFirebaseInfo;
   addedBy: UserDataInfo;
   createdAt: DateInfo;
 };
@@ -292,17 +292,24 @@ export type ImageAssets = {
   assets: ImageAssetsData[];
 };
 
+export type UserPhotosData = {
+  directUrl: string;
+  createdAt: DateInfo;
+};
+
 export type RenderAddedPhotosProps = {
-  displayName: UserDataInfo;
+  displayName: UserDataFirebaseInfo;
   photos: ImageAssetsData[];
 };
 
 export type PhotoInfoProps = {
-  displayName: UserDataInfo;
+  userDataFirebase: UserDataFirebase;
   setAddedPhoto: SetState<string>;
   dispatch: Dispatch;
   setPhotos: SetState<ImageAssetsData[]>;
   setIsPhotosLoaded: SetState<boolean>;
+  setUserVisible: SetState<boolean>;
+  isUserVisible: boolean;
 };
 
 export type RefreshProps = {
@@ -338,7 +345,7 @@ export type PhotoContentProps = {
   addedPhoto: string;
   isPhotosLoaded: boolean;
   photos: ImageAssetsData[];
-  displayName: UserDataInfo;
+  displayName: UserDataFirebaseInfo;
   isPermissionRequest: boolean;
 };
 
@@ -369,3 +376,81 @@ export type TrailingEyeIconProps = {
 };
 
 export type ChangeText = ((text: string) => void) | undefined;
+export type ImageUrl = string;
+export type StateBoolean = SetState<boolean>;
+
+export type UserDataFirebase =
+  | {
+      email: string;
+      id: string;
+      nickname: string;
+      role: string;
+    }
+  | undefined;
+
+export type VisibleLength = number | "" | undefined;
+
+export type TruncateProps = {
+  userData?: UserDataFirebase;
+  onPressTruncate?: OnPress;
+  visibleLength?: VisibleLength;
+};
+
+export type UserRowProps = TruncateProps & {
+  label: string;
+  value: string | undefined;
+  isTruncateLabel: boolean;
+};
+
+type Row = {
+  isTruncateLabel: boolean;
+  label: string;
+  value: string | undefined;
+};
+
+type TruncateData = Row & {
+  specialFieldForTruncate?: TruncateProps;
+};
+
+export type TruncateUserData = (Row & TruncateData)[];
+
+export type DialogWithUserInfoProps = {
+  userData: UserDataFirebase;
+  onPress: OnPress;
+  onPressTruncate: OnPress;
+  visible: boolean;
+  visibleLength: VisibleLength;
+};
+
+export type UserPhotosProps = {
+  isUserPhotosLoaded: boolean;
+  isPhotosNotExist: boolean;
+  userPhotos: UserPhotosData[];
+};
+
+type UserPhotosOnPressActions = {
+  onPressOpenDialog: OnPress;
+  onPressCloseDialog: OnPress;
+  onPressTruncate: OnPress;
+  onPressSignOut: OnPress;
+};
+
+type UserPhotosIsConditions = {
+  isContentLoaded: boolean;
+  isDialogVisible: boolean;
+  isUserPhotosLoaded: boolean;
+  isPhotosNotExist: boolean;
+};
+
+export type UserProfileAvatarWithButtonProps = UserPhotosOnPressActions & {
+  userData: UserDataFirebase;
+  isDialogVisible: boolean;
+  visibleLength: VisibleLength;
+};
+
+export type UserPhotosContentProps = UserPhotosOnPressActions &
+  UserPhotosIsConditions & {
+    userData: UserDataFirebase;
+    userPhotos: UserPhotosData[];
+    visibleLength: VisibleLength;
+  };

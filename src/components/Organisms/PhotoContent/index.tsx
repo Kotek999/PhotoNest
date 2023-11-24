@@ -34,7 +34,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
                     )}
                   </View>
                 ) : (
-                  <Spinner />
+                  <Spinner isFlex={false} />
                 )}
               </View>
             ) : (
@@ -46,7 +46,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
           </View>
         </View>
       ) : (
-        <Spinner />
+        <Spinner isFlex={false} />
       )}
     </View>
   );

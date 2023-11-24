@@ -10,6 +10,7 @@ import {
 import { generateUniqueValues } from "./generateUniqueValues";
 import { getCurrent } from "./getCurrent";
 import { getPhotosFromFirebase } from "./getPhotosFromFirebase";
+import { showCurrentLoggedUser } from "./showCurrentLoggedUser";
 
 export const getPhotoInfo = async (props: PhotoInfoProps) => {
   let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,7 +36,7 @@ export const getPhotoInfo = async (props: PhotoInfoProps) => {
     const assets: ImageAssetsData[] = [
       {
         directUrl: downloadURL,
-        addedBy: props.displayName,
+        addedBy: props.userDataFirebase?.nickname as string,
         createdAt: {
           date: getCurrent().date,
           time: getCurrent().time,
@@ -46,5 +47,6 @@ export const getPhotoInfo = async (props: PhotoInfoProps) => {
     props.setAddedPhoto(downloadURL);
     props.dispatch(savePhoto({ assets: assets }));
     getPhotosFromFirebase(props.setPhotos, props.setIsPhotosLoaded);
+    showCurrentLoggedUser(props.setUserVisible, props.isUserVisible);
   }
 };

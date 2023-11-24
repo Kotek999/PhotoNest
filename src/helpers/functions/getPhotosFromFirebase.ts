@@ -1,7 +1,8 @@
 import textData from "../../../textData.json";
 import { ImageAssetsData, SetState } from "../../types";
-import { ref, onValue, DataSnapshot } from "firebase/database";
+import { ref } from "firebase/database";
 import { db } from "../../../FirebaseConfig";
+import { createPromiseWithValue } from "./createPromiseWithValue";
 
 export const getPhotosFromFirebase = async (
   setImages: SetState<ImageAssetsData[]>,
@@ -10,9 +11,7 @@ export const getPhotosFromFirebase = async (
   const uniqueKeysRef = ref(db, textData.value.firebase.photoKeyRef);
 
   try {
-    const snapshot: DataSnapshot = await new Promise((resolve, reject) => {
-      onValue(uniqueKeysRef, resolve, reject);
-    });
+    const snapshot = await createPromiseWithValue(uniqueKeysRef);
 
     if (snapshot.exists()) {
       const uniqueKeys = Object.keys(snapshot.val());
@@ -23,11 +22,7 @@ export const getPhotosFromFirebase = async (
           db,
           `${textData.value.firebase.photoContentRef}${key}${textData.value.firebase.photoPath}`
         );
-        const contentSnapshot: DataSnapshot = await new Promise(
-          (resolve, reject) => {
-            onValue(contentRef, resolve, reject);
-          }
-        );
+        const contentSnapshot = await createPromiseWithValue(contentRef);
 
         if (contentSnapshot.exists()) {
           const content: ImageAssetsData = contentSnapshot.val();

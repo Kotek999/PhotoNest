@@ -8,12 +8,16 @@ import { getFirstLetter } from "../../../helpers/functions/getFirstLetter";
 export const TouchableAvatar = (props: LoggedUserProps): JSX => {
   return (
     <TouchableOpacity onPress={props.onPressGoToProfile}>
-      <Avatar
-        label={getFirstLetter(props.displayName as string)}
-        labelColor={COLORS.white}
-        size={28}
-        backgroundColor={COLORS.darkOpacity}
-      />
+      {props.avatarDirectPath ? (
+        <Avatar size={28} source={{ uri: props.avatarDirectPath }} />
+      ) : (
+        <Avatar
+          label={getFirstLetter(props.displayName as string)}
+          labelColor={COLORS.white}
+          size={28}
+          backgroundColor={COLORS.darkOpacity}
+        />
+      )}
       <View
         style={{
           ...styles.badge,

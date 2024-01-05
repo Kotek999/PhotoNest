@@ -12,6 +12,7 @@ export const LoggedUserWithAvatar = (props: LoggedUserWithAvatarProps): JSX => {
         <View style={styles.mainContainer}>
           <View style={styles.container}>
             <TouchableAvatar
+              avatarDirectPath={props.avatarDirectPath}
               displayName={props.displayName}
               onPressGoToProfile={props.onPressGoToProfile}
             />

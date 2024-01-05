@@ -63,6 +63,9 @@ function* onSignUpUser(action: SignUpAction) {
                 nickname: nick,
                 email: email,
                 password: encryptedPassword,
+                avatar: {
+                  directPath: "",
+                },
               }
             );
 
@@ -83,7 +86,6 @@ function* onSignUpUser(action: SignUpAction) {
       yield put(signUpFailure(errorCodes.message.nickLength));
     }
   } catch (error: any) {
-    // console.error("Saga SIGNUP error:", error);
     yield put(signUpFailure(error.message));
   }
 }

@@ -29,6 +29,7 @@ function* onSavePhoto(action: PayloadAction<ImageAssets>) {
           addedBy: assets[0].addedBy,
           createdAt: dateAsset,
           type: assets[0].type,
+          userId: assets[0].userId,
         },
       }
     );

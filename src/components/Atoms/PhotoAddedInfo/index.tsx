@@ -1,37 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { View, Text, Avatar } from "react-native-ui-lib";
+import { View, Text } from "react-native-ui-lib";
 import { Children, JSX, PhotoAddedInfoProps } from "../../../types";
 import { COLORS } from "../../../colors";
-import { getFirstLetter } from "../../../helpers/functions/getFirstLetter";
 import { generateDateMessage } from "../../../helpers/functions/generateDateMessage";
 import { getCurrentDateAndTime } from "../../../helpers/functions/getCurrentDateAndTime";
+import { Spinner } from "../Spinner";
+import { getUserAvatar } from "../../../helpers/functions/getUserAvatar";
 
 export const PhotoAddedInfo = (props: PhotoAddedInfoProps): JSX => {
+  const [userAvatar, setUserAvatar] = useState<Children | null>(null);
+  const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
+
   const getDateMessage = generateDateMessage(
     `${props.createdAt.date} ${props.createdAt.time}`,
     getCurrentDateAndTime()
   );
 
+  useEffect(() => {
+    getUserAvatar({
+      uid: props.userId as string,
+      addedBy: props.addedBy,
+      setUserAvatar,
+      setIsContentLoaded,
+    });
+  }, [props.userId]);
+
   return (
     <View style={styles.mainContainer}>
-      <Avatar
-        label={getFirstLetter(props.addedBy as string)}
-        labelColor="white"
-        size={40}
-        backgroundColor={COLORS.darkOpacity}
-      />
-      <View style={styles.container}>
-        <Text style={styles.value}>
-          By:{" "}
-          {props.addedBy === props.displayName ? (
-            <Text style={{ ...styles.value, fontWeight: "700" }}>You</Text>
-          ) : (
-            (props.addedBy as Children)
-          )}
-        </Text>
-        <Text style={styles.value}>{getDateMessage}</Text>
-      </View>
+      {isContentLoaded ? (
+        <>
+          {userAvatar}
+          <View style={styles.container}>
+            <Text style={styles.value}>
+              By:{" "}
+              {props.addedBy === props.displayName ? (
+                <Text style={{ ...styles.value, fontWeight: "700" }}>You</Text>
+              ) : (
+                (props.addedBy as Children)
+              )}
+            </Text>
+            <Text style={styles.value}>{getDateMessage}</Text>
+          </View>
+        </>
+      ) : (
+        <Spinner isFlex />
+      )}
     </View>
   );
 };

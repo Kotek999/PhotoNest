@@ -6,6 +6,7 @@ export const getUserDataFromFirebase = (userDataFirebase: UserDataFirebase) => {
     id: userDataFirebase.id,
     nickname: userDataFirebase.nickname,
     role: userDataFirebase.role,
+    avatar: { directPath: userDataFirebase.avatar?.directPath },
   };
   return USER_DATA_FIREBASE;
 };

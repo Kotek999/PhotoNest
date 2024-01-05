@@ -18,6 +18,7 @@ export const RenderAddedPhotos = (props: RenderAddedPhotosProps): JSX => {
           <View style={styles.container}>
             <Photo uri={item.directUrl} mb={20} />
             <PhotoAddedInfo
+              userId={item.userId}
               addedBy={item.addedBy}
               displayName={props.displayName}
               createdAt={{

@@ -79,6 +79,7 @@ export const Gallery = ({
   return (
     <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
+        avatarDirectPath={userDataFirebase?.avatar?.directPath}
         isUserShow
         isSettingsIconActive={false}
         screenName={SCREEN.Gallery}

@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { ToastAndroid, RefreshControlProps } from "react-native";
+import {
+  ToastAndroid,
+  RefreshControlProps,
+  ImageSourcePropType,
+} from "react-native";
+import { AnyAction } from "@reduxjs/toolkit";
 import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
 import { PayloadAction, Dispatch } from "@reduxjs/toolkit";
@@ -95,6 +100,7 @@ export type Colors = {
   sunsetOrange: string;
   emerald: string;
   lightGrayInput: string;
+  [key: string]: string;
 };
 
 export type ButtonsBoxProps = {
@@ -252,6 +258,7 @@ type LoggedUserDisplayName = {
 
 type LoggedUserVisible = {
   isUserVisible?: boolean;
+  avatarDirectPath?: string;
 };
 
 export type LoggedUserProps = LoggedUserVisible & LoggedUserDisplayName;
@@ -260,11 +267,10 @@ export type LoggedUserWithAvatarProps = LoggedUserProps;
 
 export type TouchableAvatarProps = LoggedUserDisplayName;
 
-export type HeaderProps = {
+export type HeaderProps = LoggedUserVisible & {
   onPressGoToProfile?: OnPress;
   onPressGoToSettings: OnPress;
   displayName?: UserDataFirebaseInfo;
-  isUserVisible?: boolean;
   isUserShow: boolean;
   isSettingsIconActive: boolean;
   screenName?: string;
@@ -279,9 +285,11 @@ export type PhotoAddedInfoProps = {
   displayName: UserDataFirebaseInfo;
   addedBy: UserDataInfo;
   createdAt: DateInfo;
+  userId: UserDataInfo;
 };
 
 export type ImageAssetsData = {
+  userId: UserDataInfo;
   directUrl: string;
   addedBy: UserDataInfo;
   createdAt: DateInfo;
@@ -385,6 +393,9 @@ export type UserDataFirebase =
       id: string;
       nickname: string;
       role: string;
+      avatar: {
+        directPath: string;
+      };
     }
   | undefined;
 
@@ -453,4 +464,105 @@ export type UserPhotosContentProps = UserPhotosOnPressActions &
     userData: UserDataFirebase;
     userPhotos: UserPhotosData[];
     visibleLength: VisibleLength;
+  };
+
+export type Users = {
+  [key: string]: {
+    avatar: {
+      directPath: string;
+    };
+  };
+};
+
+export type UserAvatarPathProps = {
+  uid: string;
+  addedBy: UserDataInfo;
+};
+
+export type UserAvatarProps = {
+  uid: string;
+  addedBy: UserDataInfo;
+  setUserAvatar: SetState<Children | null>;
+  setIsContentLoaded: SetState<boolean>;
+};
+
+export type ImageItem = {
+  id: number;
+  source: string;
+};
+
+export type RenderItemProps = {
+  item: ImageItem;
+};
+
+export type OptionalString = string | undefined;
+
+export type RenderFlatListProps = {
+  data: Record<string, ImageItem[]>;
+  activeCategory: string;
+  tempSelectedAvatar: OptionalString;
+  renderItem: (props: RenderItemProps) => JSX;
+  renderAvatarItem: (
+    selectAvatar: (...args: any[]) => void
+  ) => (props: RenderItemProps) => JSX;
+};
+
+export type RenderAvatarProps = {
+  tempSelectedAvatar: OptionalString;
+  directPath: OptionalString;
+  nickname: OptionalString;
+};
+
+export type RenderAvatarsCategoriesProps = {
+  activeCategory: string;
+  setActiveCategory: SetState<string>;
+};
+
+export type ModalAvatarsContentProps = RenderFlatListProps &
+  RenderAvatarProps &
+  RenderAvatarsCategoriesProps;
+
+export type ModalAvatarsProps = ModalAvatarsContentProps & {
+  isModalVisible: boolean | undefined;
+  onPressCloseModal: (() => void) | undefined;
+  isSaveAvatarButtonDisabled: boolean;
+  onPressSaveAvatar: (...args: any[]) => void;
+};
+
+export type DialogUserProps = DialogWithUserInfoProps & {
+  onPressOpenDialog: OnPress;
+};
+
+export type AvatarProps = {
+  nickname: OptionalString;
+  onPress: (value: SetState<boolean>) => void;
+  source: ImageSourcePropType | undefined;
+};
+
+export type AvatarSourceProp = ImageSourcePropType | undefined;
+
+export type ActionCallbackFunctionProps = (...args: any[]) => void;
+
+export type SaveAvatarCallProps = {
+  tempSelectedAvatar: OptionalString;
+  setModalVisible: SetState<boolean>;
+  setSelectedAvatar: SetState<AvatarSourceProp>;
+  dispatch: Dispatch<AnyAction>;
+};
+
+type AvatarAssetsData = {
+  directPath: string | undefined;
+};
+
+export type AvatarAssets = {
+  assets: AvatarAssetsData[];
+};
+
+export type UserProfileAvatarContentProps = DialogUserProps &
+  AvatarProps &
+  ModalAvatarsProps &
+  ModalAvatarsContentProps & {
+    selectedAvatar: AvatarSourceProp;
+    onPressCloseDialog: OnPress;
+    onPressSignOut: OnPress;
   };

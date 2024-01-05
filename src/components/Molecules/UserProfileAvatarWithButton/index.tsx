@@ -1,103 +1,74 @@
-import Entypo from "@expo/vector-icons/Entypo";
-import React from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
-import { View, Text, Avatar } from "react-native-ui-lib";
-import { JSX, UserProfileAvatarWithButtonProps } from "../../../types";
-import { COLORS } from "../../../colors";
-import { getFirstLetter } from "../../../helpers/functions/getFirstLetter";
-import { DialogWithUserInfo } from "../../../components/Molecules/DialogWithUserInfo";
-import { SignOutButton } from "../../../components/Atoms/SignOutButton";
+import React, { useState } from "react";
+import {
+  JSX,
+  AvatarSourceProp,
+  UserProfileAvatarWithButtonProps,
+  OptionalString,
+} from "../../../types";
+import { useDispatch } from "react-redux";
+import { useCallbackFunction } from "../../../helpers/functions/useCallbackFunction";
+import { renderAvatarItem } from "../../Atoms/RenderAvatarItem";
+import { UserProfileAvatarContent } from "../../Organisms/UserProfileAvatarContent";
+import { selectAvatar } from "../../../helpers/functions/selectAvatar";
+import { saveAvatarCall } from "../../../helpers/functions/saveAvatarCall";
+import { avatarsImages } from "../../Data/Avatars";
 
 export const UserProfileAvatarWithButton = (
   props: UserProfileAvatarWithButtonProps
 ): JSX => {
+  const dispatch = useDispatch();
+
+  const [selectedAvatar, setSelectedAvatar] = useState<AvatarSourceProp>();
+  const [tempSelectedAvatar, setTempSelectedAvatar] =
+    useState<OptionalString>();
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [activeCategory, setActiveCategory] = useState<string>("People");
+
+  const getAvatar = selectAvatar(setTempSelectedAvatar);
+
+  const onCloseCallback = useCallbackFunction(
+    (callback: (value: boolean) => void) => {
+      callback(false);
+    }
+  );
+
+  const modalVisible = () => setModalVisible(true);
+  const closeModal = () => onCloseCallback(setModalVisible);
+
+  const onPressSaveAvatar = saveAvatarCall({
+    tempSelectedAvatar: tempSelectedAvatar,
+    setModalVisible: setModalVisible,
+    setSelectedAvatar: setSelectedAvatar,
+    dispatch: dispatch,
+  });
+
+  const isSaveAvatarButtonDisabled = !tempSelectedAvatar;
+  const renderItem = renderAvatarItem(getAvatar);
+
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.avatarWithButtoncontainer}>
-        <View style={styles.avatarWithDialogContainer}>
-          <Avatar
-            label={getFirstLetter(props.userData?.nickname)}
-            labelColor={COLORS.white}
-            size={80}
-            backgroundColor={COLORS.darkOpacity}
-          />
-          <View style={styles.dialogContainer}>
-            <View style={styles.textWithIconContainer}>
-              <Text style={styles.nicknameValue}>
-                {props.userData?.nickname}
-              </Text>
-              <TouchableOpacity onPress={props.onPressOpenDialog}>
-                <Entypo
-                  name="info-with-circle"
-                  size={21}
-                  style={styles.icon}
-                  color={COLORS.lightGrayInput}
-                />
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.roleValue}>Role: {props.userData?.role}</Text>
-            <DialogWithUserInfo
-              userData={props.userData}
-              visible={props.isDialogVisible}
-              visibleLength={props.visibleLength}
-              onPress={props.onPressCloseDialog}
-              onPressTruncate={props.onPressTruncate}
-            />
-          </View>
-        </View>
-        <SignOutButton onPress={props.onPressSignOut} />
-      </View>
-    </View>
+    <UserProfileAvatarContent
+      directPath={props.userData?.avatar.directPath}
+      nickname={props.userData?.nickname}
+      selectedAvatar={selectedAvatar}
+      source={selectedAvatar}
+      isModalVisible={isModalVisible}
+      isSaveAvatarButtonDisabled={isSaveAvatarButtonDisabled}
+      activeCategory={activeCategory}
+      setActiveCategory={setActiveCategory}
+      tempSelectedAvatar={tempSelectedAvatar}
+      renderItem={renderItem}
+      renderAvatarItem={renderAvatarItem}
+      data={avatarsImages}
+      userData={props.userData}
+      visible={props.isDialogVisible}
+      visibleLength={props.visibleLength}
+      onPressTruncate={props.onPressTruncate}
+      onPressOpenDialog={props.onPressOpenDialog}
+      onPressCloseDialog={props.onPressCloseDialog}
+      onPress={modalVisible}
+      onPressCloseModal={closeModal}
+      onPressSignOut={props.onPressSignOut}
+      onPressSaveAvatar={onPressSaveAvatar}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    marginTop: 10,
-    flexDirection: "row",
-    alignItems: "flex-start",
-    alignContent: "center",
-  },
-  avatarWithButtoncontainer: {
-    flex: 1,
-    marginLeft: 16,
-    marginRight: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    alignContent: "center",
-  },
-  avatarWithDialogContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  dialogContainer: {
-    padding: 16,
-    flexDirection: "column",
-  },
-  textWithIconContainer: {
-    flexDirection: "row",
-  },
-  nicknameValue: {
-    color: COLORS.emerald,
-    fontSize: 16,
-    fontFamily: "Open-Sans",
-    fontWeight: "bold",
-    letterSpacing: 0.5,
-    marginBottom: 5,
-  },
-  icon: {
-    alignContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "center",
-    marginLeft: 10,
-  },
-  roleValue: {
-    color: COLORS.grayItemMenu,
-    fontSize: 14,
-    fontFamily: "Open-Sans",
-    letterSpacing: 0.5,
-  },
-});

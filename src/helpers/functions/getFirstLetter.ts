@@ -1,4 +1,13 @@
 export const getFirstLetter = (word: string | undefined) => {
-  const letter = word && word.charAt(0).toUpperCase();
-  return letter;
+  if (!word || word.length === 0) {
+    return undefined;
+  }
+
+  const firstLetter = word.charAt(0);
+
+  if (firstLetter === firstLetter.toUpperCase()) {
+    return firstLetter;
+  } else {
+    return firstLetter.toLowerCase();
+  }
 };

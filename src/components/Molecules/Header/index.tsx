@@ -15,6 +15,7 @@ export const Header = (props: HeaderProps): JSX => {
       <View style={styles.container}>
         {props.isUserShow ? (
           <LoggedUserWithAvatar
+            avatarDirectPath={props.avatarDirectPath}
             displayName={props.displayName}
             isUserVisible={props.isUserVisible}
             onPressGoToProfile={props.onPressGoToProfile}

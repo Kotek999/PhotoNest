@@ -11,7 +11,7 @@ import { backHandlerCall } from "../../helpers/functions/backHandlerCall";
 
 export const Welcome = ({
   navigation,
-}: NavigationScreenProps<SCREEN.SignUp>): JSX => {
+}: NavigationScreenProps<SCREEN.Welcome>): JSX => {
   const onPressGoToLogin = () => navigation.navigate(SCREEN.Login);
   const onPressGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
 

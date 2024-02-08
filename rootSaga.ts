@@ -5,6 +5,7 @@ import { signUpAuth } from "./src/redux/auth/signUp/saga";
 import { signOutAuth } from "./src/redux/auth/signOut/saga";
 import { savePhotoSaga } from "./src/redux/savePhotos/saga";
 import { saveAvatarSaga } from "./src/redux/saveAvatar/saga";
+import { setColightSaga } from "./src/redux/setColight/saga";
 
 export function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export function* rootSaga() {
     signOutAuth(),
     savePhotoSaga(),
     saveAvatarSaga(),
+    setColightSaga(),
   ]);
 }

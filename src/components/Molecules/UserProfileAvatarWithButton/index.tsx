@@ -6,7 +6,6 @@ import {
   OptionalString,
 } from "../../../types";
 import { useDispatch } from "react-redux";
-import { useCallbackFunction } from "../../../helpers/functions/useCallbackFunction";
 import { renderAvatarItem } from "../../Atoms/RenderAvatarItem";
 import { UserProfileAvatarContent } from "../../Organisms/UserProfileAvatarContent";
 import { selectAvatar } from "../../../helpers/functions/selectAvatar";
@@ -21,24 +20,16 @@ export const UserProfileAvatarWithButton = (
   const [selectedAvatar, setSelectedAvatar] = useState<AvatarSourceProp>();
   const [tempSelectedAvatar, setTempSelectedAvatar] =
     useState<OptionalString>();
-  const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [activeCategory, setActiveCategory] = useState<string>("People");
+  const [isAvatarChangedMessage, setIsAvatarChangedMessage] =
+    useState<boolean>(false);
 
   const getAvatar = selectAvatar(setTempSelectedAvatar);
 
-  const onCloseCallback = useCallbackFunction(
-    (callback: (value: boolean) => void) => {
-      callback(false);
-    }
-  );
-
-  const modalVisible = () => setModalVisible(true);
-  const closeModal = () => onCloseCallback(setModalVisible);
-
   const onPressSaveAvatar = saveAvatarCall({
     tempSelectedAvatar: tempSelectedAvatar,
-    setModalVisible: setModalVisible,
     setSelectedAvatar: setSelectedAvatar,
+    setIsAvatarChangedMessage: setIsAvatarChangedMessage,
     dispatch: dispatch,
   });
 
@@ -47,12 +38,12 @@ export const UserProfileAvatarWithButton = (
 
   return (
     <UserProfileAvatarContent
+      isAvatarChangedMessage={isAvatarChangedMessage}
+      isSaveAvatarButtonDisabled={isSaveAvatarButtonDisabled}
       directPath={props.userData?.avatar.directPath}
       nickname={props.userData?.nickname}
       selectedAvatar={selectedAvatar}
       source={selectedAvatar}
-      isModalVisible={isModalVisible}
-      isSaveAvatarButtonDisabled={isSaveAvatarButtonDisabled}
       activeCategory={activeCategory}
       setActiveCategory={setActiveCategory}
       tempSelectedAvatar={tempSelectedAvatar}
@@ -65,8 +56,6 @@ export const UserProfileAvatarWithButton = (
       onPressTruncate={props.onPressTruncate}
       onPressOpenDialog={props.onPressOpenDialog}
       onPressCloseDialog={props.onPressCloseDialog}
-      onPress={modalVisible}
-      onPressCloseModal={closeModal}
       onPressSignOut={props.onPressSignOut}
       onPressSaveAvatar={onPressSaveAvatar}
     />

@@ -7,10 +7,15 @@ import { ModalAvatars } from "../../Molecules/ModalAvatars";
 import { DialogUser } from "../../Molecules/DialogUser";
 import { UserAvatar } from "../../Atoms/UserAvatar";
 import { JSX, UserProfileAvatarContentProps } from "../../../types";
+import { BottomModal } from "../../Atoms/BottomModal";
+import { useBottomModal } from "../../../helpers/functions/useBottomModal";
 
 export const UserProfileAvatarContent = (
   props: UserProfileAvatarContentProps
 ): JSX => {
+  const modal = useBottomModal();
+  const openModal = () => modal.onPressOpenModal(0);
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.avatarWithButtoncontainer}>
@@ -20,13 +25,13 @@ export const UserProfileAvatarContent = (
               {props.selectedAvatar ? (
                 <UserAvatar
                   nickname={props.userData?.nickname}
-                  onPress={props.onPress}
+                  onPressOpenModal={openModal}
                   source={props.selectedAvatar}
                 />
               ) : (
                 <UserAvatar
                   nickname={props.userData?.nickname}
-                  onPress={props.onPress}
+                  onPressOpenModal={openModal}
                   source={{ uri: props.userData?.avatar.directPath }}
                 />
               )}
@@ -34,25 +39,32 @@ export const UserProfileAvatarContent = (
           ) : (
             <UserAvatar
               nickname={props.userData?.nickname}
-              onPress={props.onPress}
+              onPressOpenModal={openModal}
               source={props.selectedAvatar}
             />
           )}
-          <ModalAvatars
-            isModalVisible={props.isModalVisible}
-            isSaveAvatarButtonDisabled={props.isSaveAvatarButtonDisabled}
-            data={props.data}
-            activeCategory={props.activeCategory}
-            setActiveCategory={props.setActiveCategory}
-            tempSelectedAvatar={props.tempSelectedAvatar}
-            directPath={props.userData?.avatar.directPath}
-            nickname={props.userData?.nickname}
-            renderItem={props.renderItem}
-            renderAvatarItem={renderAvatarItem}
-            onPressCloseModal={props.onPressCloseModal}
-            onPressSaveAvatar={props.onPressSaveAvatar}
-          />
-
+          <BottomModal
+            ref={modal.bottomSheetModalRef}
+            snapPointsValue="100%"
+            enableContentPanningGesture={false}
+            onPressCloseModal={modal.onPressCloseModal}
+            isTitleExist
+            title="Avatar Preview"
+          >
+            <ModalAvatars
+              isAvatarChangedMessage={props.isAvatarChangedMessage}
+              isSaveAvatarButtonDisabled={props.isSaveAvatarButtonDisabled}
+              data={props.data}
+              activeCategory={props.activeCategory}
+              setActiveCategory={props.setActiveCategory}
+              tempSelectedAvatar={props.tempSelectedAvatar}
+              directPath={props.userData?.avatar.directPath}
+              nickname={props.userData?.nickname}
+              renderItem={props.renderItem}
+              renderAvatarItem={renderAvatarItem}
+              onPressSaveAvatar={props.onPressSaveAvatar}
+            />
+          </BottomModal>
           <DialogUser
             userData={props.userData}
             visible={props.visible}

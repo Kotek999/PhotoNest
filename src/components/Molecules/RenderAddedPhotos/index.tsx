@@ -5,6 +5,7 @@ import { View } from "react-native-ui-lib";
 import { JSX, RenderAddedPhotosProps } from "../../../types";
 import { Photo } from "../../../components/Atoms/Photo";
 import { PhotoAddedInfo } from "../../../components/Atoms/PhotoAddedInfo";
+import { SCREEN } from "../../../../routes";
 
 export const RenderAddedPhotos = (props: RenderAddedPhotosProps): JSX => {
   return (
@@ -13,7 +14,11 @@ export const RenderAddedPhotos = (props: RenderAddedPhotosProps): JSX => {
         <TouchableWithoutFeedback
           key={`photosMap-${i}`}
           style={styles.touchableContainer}
-          onPress={() => alert("click")}
+          onPress={() =>
+            props.navigation.navigation.navigate(SCREEN.PhotoDetails, {
+              photoData: item,
+            })
+          }
         >
           <View style={styles.container}>
             <Photo uri={item.directUrl} mb={20} />

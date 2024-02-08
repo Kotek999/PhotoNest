@@ -17,7 +17,11 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
           <View>
             {!props.mediaPermission === false ? (
               <View style={styles.mainContainer}>
-                <AddedPhoto uri={props.addedPhoto} />
+                <AddedPhoto
+                  uri={props.addedPhoto}
+                  colight={props.colight}
+                  onPressOpenModal={props.onPressOpenModal}
+                />
                 {props.isPhotosLoaded ? (
                   <View style={styles.container}>
                     {props.photos.length === 0 ? (
@@ -30,6 +34,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
                       <RenderAddedPhotos
                         displayName={props.displayName}
                         photos={props.photos}
+                        navigation={props.navigation}
                       />
                     )}
                   </View>

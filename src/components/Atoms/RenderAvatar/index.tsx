@@ -34,8 +34,8 @@ export const RenderAvatar = (props: RenderAvatarProps): JSX => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 0,
+    marginBottom: 0,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

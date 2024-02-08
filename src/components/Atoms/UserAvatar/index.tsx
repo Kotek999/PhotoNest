@@ -11,7 +11,7 @@ export const UserAvatar = (props: AvatarProps): JSX => {
       labelColor={COLORS.white}
       size={80}
       backgroundColor={COLORS.darkOpacity}
-      onPress={props.onPress}
+      onPress={props.onPressOpenModal}
       source={props.source}
     />
   );

@@ -18,9 +18,13 @@ import { PhotoContent } from "../../components/Organisms/PhotoContent";
 import { COLORS } from "../../colors";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { getUserData } from "../../helpers/functions/getUserData";
+import { BottomModal } from "../../components/Atoms/BottomModal";
+import { ColightInfo } from "../../components/Atoms/ColightInfo";
+import { useBottomModal } from "../../helpers/functions/useBottomModal";
 
 export const Gallery = ({
   navigation,
+  route,
 }: NavigationScreenProps<SCREEN.Gallery>): JSX => {
   const dispatch = useDispatch();
 
@@ -76,6 +80,8 @@ export const Gallery = ({
     setIsContentLoaded(true);
   }, [photos]);
 
+  const modal = useBottomModal();
+
   return (
     <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
@@ -100,6 +106,7 @@ export const Gallery = ({
         }
       >
         <PhotoContent
+          navigation={{ navigation: navigation, route }}
           isContentLoaded={isContentLoaded}
           isPhotosLoaded={isPhotosLoaded}
           isPermissionRequest={isPermissionRequest}
@@ -107,6 +114,8 @@ export const Gallery = ({
           addedPhoto={addedPhoto}
           photos={photos}
           displayName={userDataFirebase?.nickname}
+          colight={userDataFirebase?.points}
+          onPressOpenModal={() => modal.onPressOpenModal(0)}
         />
       </ScrollViewContainer>
 
@@ -115,6 +124,14 @@ export const Gallery = ({
         setIsPermissionRequest={setIsPermissionRequest}
         addPhoto={addPhoto}
       />
+      <BottomModal
+        ref={modal.bottomSheetModalRef}
+        enableContentPanningGesture
+        snapPointsValue="100%"
+        onPressCloseModal={modal.onPressCloseModal}
+      >
+        <ColightInfo />
+      </BottomModal>
     </Screen>
   );
 };

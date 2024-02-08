@@ -15,7 +15,7 @@ export const saveAvatarCall = (props: SaveAvatarCallProps) => {
             text: textData.value.alert.cancel,
             style: textData.value.alert.cancelStyle as CancelStyle,
             onPress: () => {
-              props.setModalVisible(false);
+              null;
             },
           },
           {
@@ -27,7 +27,7 @@ export const saveAvatarCall = (props: SaveAvatarCallProps) => {
                   assets: [{ directPath: props.tempSelectedAvatar }],
                 })
               );
-              props.setModalVisible(false);
+              props.setIsAvatarChangedMessage(true);
             },
           },
         ],

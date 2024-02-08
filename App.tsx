@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { Root } from "./root";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,10 +25,12 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayout}>
-      <Provider store={store}>
-        <Root />
-      </Provider>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} onLayout={onLayout}>
+        <Provider store={store}>
+          <Root />
+        </Provider>
+      </View>
+    </GestureHandlerRootView>
   );
 }

@@ -23,7 +23,7 @@ export const Auth = ({
     <Screen styleOfStatusBar="light">
       <Background>
         <View style={styles.container}>
-          <Spinner isFlex={false} />
+          <Spinner isFlex={false} isTextExist />
         </View>
       </Background>
     </Screen>

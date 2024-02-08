@@ -1,11 +1,12 @@
+import textData from "../../../../textData.json";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { View, Text } from "react-native-ui-lib";
 import { JSX, UserPhotosProps } from "../../../types";
 import { COLORS } from "../../../colors";
-import { Photo } from "../../../components/Atoms/Photo";
 import { PhotoMessage } from "../../../components/Atoms/PhotoMessage";
 import { Spinner } from "../../../components/Atoms/Spinner";
+import { PhotoOfUser } from "../../Atoms/PhotoOfUser";
 
 export const UserPhotos = (props: UserPhotosProps): JSX => {
   return (
@@ -24,12 +25,12 @@ export const UserPhotos = (props: UserPhotosProps): JSX => {
       {props.isUserPhotosLoaded ? (
         <View style={styles.mainContainer}>
           {props.isPhotosNotExist && (
-            <PhotoMessage title="Oops... you don't have any photos added" />
+            <PhotoMessage title={textData.value.photo.title.message.noPhotos} />
           )}
           <View style={styles.photosContainer}>
             {props.userPhotos.map((photo, i) => (
               <View key={`userPhotosMap-${i}`} style={styles.photoContainer}>
-                <Photo uri={photo.directUrl} mb={10} />
+                <PhotoOfUser uri={photo.directUrl} mb={10} />
                 <View style={styles.dateContainer}>
                   <Text style={styles.value}>
                     Date: {photo.createdAt.date} {photo.createdAt.time}

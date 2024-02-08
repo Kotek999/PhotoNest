@@ -63,6 +63,9 @@ function* onSignUpUser(action: SignUpAction) {
                 nickname: nick,
                 email: email,
                 password: encryptedPassword,
+                colight: {
+                  value: 0,
+                },
                 avatar: {
                   directPath: "",
                 },

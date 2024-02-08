@@ -1,16 +1,16 @@
+import textData from "../../../../textData.json";
 import React, { useMemo } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { View, Button } from "react-native-ui-lib";
 import { JSX, RenderAvatarsCategoriesProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { getColorForCategory } from "../../../helpers/functions/getColorForCategory";
+import { categoriesData } from "../../Data/AvatarCategories";
 
 export const RenderAvatarsCategories = (
   props: RenderAvatarsCategoriesProps
 ): JSX => {
   const categories: JSX = useMemo(() => {
-    const categoriesData = ["People", "Animals", "Cars", "Food"];
-
     return (
       <ScrollView horizontal contentContainerStyle={styles.scrollView}>
         <View style={styles.container}>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     flexGrow: 1,
     backgroundColor: COLORS.blank,
+    alignSelf: "center",
   },
   container: {
     marginTop: 20,

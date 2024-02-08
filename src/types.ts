@@ -4,11 +4,13 @@ import {
   RefreshControlProps,
   ImageSourcePropType,
 } from "react-native";
-import { AnyAction } from "@reduxjs/toolkit";
+import { AnyAction, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
-import { PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
+import { NavigationScreenProps } from "../rootTypeList";
+import { SCREEN } from "../routes";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export type Children = ReactNode;
 export type JSX = React.JSX.Element;
@@ -308,6 +310,9 @@ export type UserPhotosData = {
 export type RenderAddedPhotosProps = {
   displayName: UserDataFirebaseInfo;
   photos: ImageAssetsData[];
+  navigation: NavigationScreenProps<SCREEN.Gallery>;
+
+  pointsValue?: number;
 };
 
 export type PhotoInfoProps = {
@@ -339,10 +344,14 @@ export type TitleProps = {
 
 type UriSource = {
   uri: string;
+  colight?: number;
+  onPressOpenModal: OnPress;
 };
 
-export type PhotoProps = UriSource & {
+export type PhotoProps = {
+  uri: string;
   mb?: number | undefined;
+  pointsValue?: number;
 };
 
 export type AddedPhotoProps = UriSource;
@@ -355,6 +364,11 @@ export type PhotoContentProps = {
   photos: ImageAssetsData[];
   displayName: UserDataFirebaseInfo;
   isPermissionRequest: boolean;
+  navigation: NavigationScreenProps<SCREEN.Gallery>;
+  colight?: number | undefined;
+  onPressOpenModal: OnPress;
+
+  pointsValue?: number;
 };
 
 export type LeadingIconProps = {
@@ -387,12 +401,25 @@ export type ChangeText = ((text: string) => void) | undefined;
 export type ImageUrl = string;
 export type StateBoolean = SetState<boolean>;
 
+type ForPhotoData = {
+  forPhoto: {
+    nickname: OptionalString;
+    forDirectUrl: OptionalString;
+    value: OptionalNumber;
+  };
+};
+
 export type UserDataFirebase =
   | {
       email: string;
       id: string;
       nickname: string;
       role: string;
+      points: number;
+      colight: {
+        received?: ForPhotoData;
+        given?: ForPhotoData;
+      };
       avatar: {
         directPath: string;
       };
@@ -427,7 +454,7 @@ export type TruncateUserData = (Row & TruncateData)[];
 
 export type DialogWithUserInfoProps = {
   userData: UserDataFirebase;
-  onPress: OnPress;
+  onPress?: OnPress;
   onPressTruncate: OnPress;
   visible: boolean;
   visibleLength: VisibleLength;
@@ -496,6 +523,7 @@ export type RenderItemProps = {
 };
 
 export type OptionalString = string | undefined;
+export type OptionalNumber = number | undefined;
 
 export type RenderFlatListProps = {
   data: Record<string, ImageItem[]>;
@@ -523,8 +551,7 @@ export type ModalAvatarsContentProps = RenderFlatListProps &
   RenderAvatarsCategoriesProps;
 
 export type ModalAvatarsProps = ModalAvatarsContentProps & {
-  isModalVisible: boolean | undefined;
-  onPressCloseModal: (() => void) | undefined;
+  isAvatarChangedMessage: boolean;
   isSaveAvatarButtonDisabled: boolean;
   onPressSaveAvatar: (...args: any[]) => void;
 };
@@ -535,7 +562,7 @@ export type DialogUserProps = DialogWithUserInfoProps & {
 
 export type AvatarProps = {
   nickname: OptionalString;
-  onPress: (value: SetState<boolean>) => void;
+  onPressOpenModal?: OnPress;
   source: ImageSourcePropType | undefined;
 };
 
@@ -545,8 +572,8 @@ export type ActionCallbackFunctionProps = (...args: any[]) => void;
 
 export type SaveAvatarCallProps = {
   tempSelectedAvatar: OptionalString;
-  setModalVisible: SetState<boolean>;
   setSelectedAvatar: SetState<AvatarSourceProp>;
+  setIsAvatarChangedMessage: SetState<boolean>;
   dispatch: Dispatch<AnyAction>;
 };
 
@@ -566,3 +593,95 @@ export type UserProfileAvatarContentProps = DialogUserProps &
     onPressCloseDialog: OnPress;
     onPressSignOut: OnPress;
   };
+
+export type BottomModalRef = BottomSheetModal;
+
+export type BottomModalProps = {
+  enableContentPanningGesture?: boolean | undefined;
+  snapPointsValue: string | number;
+  onPressCloseModal: OnPress;
+  children: Children;
+  isTitleExist?: boolean;
+  title?: string;
+};
+
+export type SpinnerProps = {
+  isFlex: boolean;
+  isTextExist?: boolean;
+};
+
+export type UserPathData = {
+  uid: UserDataInfo;
+  currentUid: OptionalString;
+  createdAt: {
+    time: string;
+    date: string;
+  };
+  avatarPath: OptionalString;
+  role: OptionalString;
+  type: "image" | "video";
+  forPhotoData: {
+    forPhoto: {
+      nickname: UserDataInfo;
+      directUrl: string;
+      value: number;
+    };
+  };
+};
+
+export type UserPhotoProps = {
+  user: UserPathData;
+};
+
+export type ColightButtonProps = {
+  user: UserPathData;
+  isPathsLoaded: boolean;
+  isColightExist: boolean;
+  isLiked: boolean;
+  onPressSetColight: OnPress;
+};
+
+type UserPathProps = UserPhotoProps & {
+  isPathsLoaded: boolean;
+  isColightExist: boolean;
+  isLiked: boolean;
+  onPressSetColight: OnPress;
+};
+
+export type PhotoDetailsContentProps = UserPathProps & {
+  isContentLoaded: boolean;
+  onPressGoBack: OnPress;
+  points: number;
+};
+
+type ForPhotoAssets = {
+  forPhoto: {
+    nickname: UserDataInfo;
+    directUrl: OptionalString;
+    value: OptionalNumber;
+  };
+};
+
+export type ColightAssets = {
+  currentUserId: OptionalString;
+  userId: UserDataInfo;
+  colight: {
+    received: ForPhotoAssets;
+    given: ForPhotoAssets;
+  };
+};
+
+export type PointsValue = {
+  userId: UserDataInfo;
+  points: OptionalNumber;
+};
+
+export type ParagraphProps = {
+  firstPart: string;
+  secondPart: string;
+  thirdPart: string;
+};
+
+export type AmountOfColightsProps = {
+  points: number;
+};

@@ -19,7 +19,7 @@ export const BottomModal = forwardRef<BottomModalRef, BottomModalProps>(
         backgroundStyle={styles.modalBackground}
       >
         <BottomSheetView style={styles.modalViewContainer}>
-          <View style={styles.container}>
+          <View style={!props.isDefaultStyle ? styles.container : props.styles}>
             <View style={styles.iconContainer}>
               <View
                 style={

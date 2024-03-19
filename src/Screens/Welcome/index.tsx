@@ -8,15 +8,17 @@ import { Slogan } from "../../components/Atoms/Slogan";
 import { ButtonsBox } from "../../components/Atoms/ButtonsBox";
 import { Background } from "../../components/Atoms/Background";
 import { backHandlerCall } from "../../helpers/functions/backHandlerCall";
+import { useNavigation } from "../../hooks/navigation/useNavigation";
 
 export const Welcome = ({
   navigation,
+  route,
 }: NavigationScreenProps<SCREEN.Welcome>): JSX => {
-  const onPressGoToLogin = () => navigation.navigate(SCREEN.Login);
-  const onPressGoToSignUp = () => navigation.navigate(SCREEN.SignUp);
-
+  const { onPressGoToLogin, onPressGoToSignUp } = useNavigation({
+    navigation,
+    route,
+  });
   useFocusEffect(backHandlerCall());
-
   return (
     <Screen styleOfStatusBar="light">
       <Background>

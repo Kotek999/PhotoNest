@@ -6,6 +6,7 @@ import { JSX, RenderAddedPhotosProps } from "../../../types";
 import { Photo } from "../../../components/Atoms/Photo";
 import { PhotoAddedInfo } from "../../../components/Atoms/PhotoAddedInfo";
 import { SCREEN } from "../../../../routes";
+import { screenHeight } from "../../../helpers/dimensions";
 
 export const RenderAddedPhotos = (props: RenderAddedPhotosProps): JSX => {
   return (
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    height: 250,
+    height: screenHeight / 3.2,
     marginTop: 40,
     marginBottom: 40,
   },

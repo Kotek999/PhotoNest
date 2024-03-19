@@ -7,7 +7,17 @@ import { JSX, TitleProps as PhotoMessageProps } from "../../../types";
 export const PhotoMessage = (props: PhotoMessageProps): JSX => {
   return (
     <View style={styles.container}>
-      <Text style={styles.value}>{props.title}</Text>
+      {props.isTitleForNotExistPhotos ? (
+        <Text style={styles.value}>
+          Oops...{" "}
+          <Text style={{ ...styles.value, fontWeight: "bold" }}>
+            {props.userNameForTitle}
+          </Text>{" "}
+          don't have any photos added
+        </Text>
+      ) : (
+        <Text style={styles.value}>{props.title}</Text>
+      )}
     </View>
   );
 };

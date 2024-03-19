@@ -11,7 +11,7 @@ export const PhotoDetailsContent = (props: PhotoDetailsContentProps): JSX => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" hidden backgroundColor={COLORS.purpleBg} />
-      <ScrollViewContainer>
+      <ScrollViewContainer isDefaultOptions>
         <UserPhotoDetails
           isContentLoaded={props.isContentLoaded}
           isPathsLoaded={props.isPathsLoaded}

@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { JSX } from "../../types";
 import { SCREEN } from "../../../routes";
 import { Screen } from "../../components/Atoms/Screen";
 import { signUp, clearError } from "../../redux/auth/signUp/action";
-import { useDispatch, useSelector } from "react-redux";
 import { signUpLoading } from "../../selectors/userAuth";
 import { SignUpContent } from "../../components/Organisms/SignUpContent";
+import { useAuth } from "../../hooks/auth/useAuth";
 
 export const SignUp = ({
   navigation,
+  route,
 }: NavigationScreenProps<SCREEN.SignUp>): JSX => {
-  const isLoading = useSelector(signUpLoading);
-
-  const [nick, setNick] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(clearError());
-  }, [dispatch]);
-
-  const onPressGoToLogin = () => navigation.navigate(SCREEN.Login);
-
-  const onPressSignUp = () => {
-    dispatch(signUp({ nick, email, password, redirect: navigation.navigate }));
-  };
-
+  const {
+    isLoading,
+    nick,
+    setNick,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    onPressAuth,
+    onPressGoToLogin,
+  } = useAuth(
+    { navigation: navigation, route: route },
+    { dispatchValue: clearError, loading: signUpLoading, action: signUp }
+  );
   return (
     <Screen styleOfStatusBar="light">
       <SignUpContent
@@ -39,7 +36,7 @@ export const SignUp = ({
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
-        onPressSignUp={onPressSignUp}
+        onPressSignUp={onPressAuth}
         onPressGoToLogin={onPressGoToLogin}
       />
     </Screen>

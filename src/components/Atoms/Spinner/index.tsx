@@ -4,11 +4,11 @@ import { View, Text } from "react-native-ui-lib";
 import { ActivityIndicator } from "react-native";
 import { JSX, SpinnerProps } from "../../../types";
 import { COLORS } from "../../../colors";
-import { screenHeight } from "../../../helpers/dimensions";
+import { screenWidth } from "../../../helpers/dimensions";
 
 export const Spinner = (props: SpinnerProps): JSX => {
   return (
-    <View style={props.isFlex ? styles.flexContainer : styles.container}>
+    <View style={props.isDefaultOptions ? styles.flexContainer : props.style}>
       <ActivityIndicator size="large" color={COLORS.emerald} />
       {props.isTextExist && (
         <Text style={styles.loadingValue}>Welcome again</Text>
@@ -17,13 +17,6 @@ export const Spinner = (props: SpinnerProps): JSX => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    height: screenHeight / 1.4,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-  },
   flexContainer: {
     flex: 1,
     flexDirection: "column",
@@ -32,10 +25,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   loadingValue: {
-    margin: 24,
-    color: COLORS.blackText,
-    fontSize: 18,
+    marginTop: 40,
     fontFamily: "Open-Sans",
-    letterSpacing: 1.1,
+    textAlign: "center",
+    padding: 10,
+    width: screenWidth,
+    backgroundColor: COLORS.darkOpacity,
+    color: COLORS.white,
+    fontSize: 30,
+    letterSpacing: 0.5,
+    fontWeight: "500",
   },
 });

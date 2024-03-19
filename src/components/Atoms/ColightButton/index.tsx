@@ -73,7 +73,7 @@ export const ColightButton = (props: ColightButtonProps): JSX => {
           )}
         </View>
       ) : (
-        <Spinner isFlex />
+        <Spinner isDefaultOptions />
       )}
     </>
   );

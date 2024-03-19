@@ -1,15 +1,19 @@
 import textData from "../../../textData.json";
-import { auth, db } from "../../../FirebaseConfig";
+import { db } from "../../../FirebaseConfig";
 import { ref, DataSnapshot, get } from "firebase/database";
-import { SetState, StateBoolean, UserPhotosData } from "../../types";
+import {
+  OptionalString,
+  SetState,
+  StateBoolean,
+  UserPhotosData,
+} from "../../types";
 
 export const getUserPhotosFromFirebase = async (
   setContent: SetState<UserPhotosData[]>,
   setContentLoaded: StateBoolean,
-  setIsPhotosNotExist: StateBoolean
+  setIsPhotosNotExist: StateBoolean,
+  userUid: OptionalString
 ) => {
-  const userUid = auth.currentUser?.uid;
-
   try {
     const roomRef = ref(
       db,

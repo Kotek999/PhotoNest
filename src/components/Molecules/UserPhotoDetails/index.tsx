@@ -8,7 +8,6 @@ import {
 import { Spinner } from "../../../components/Atoms/Spinner";
 import { ColightButton } from "../../../components/Atoms/ColightButton";
 import { UserPhotoInfo } from "../../../components/Atoms/UserPhotoInfo";
-import { AmountOfColights } from "../../../components/Atoms/AmountOfColights";
 import { CloseIcon } from "../../../components/Atoms/CloseIcon";
 import { FullPhoto } from "../../../components/Atoms/FullPhoto";
 
@@ -19,7 +18,6 @@ export const UserPhotoDetails = (props: UserPhotoDetailsProps): JSX => {
         <View style={styles.container}>
           <FullPhoto user={props.user} />
           <CloseIcon onPress={props.onPressGoBack} />
-          <AmountOfColights points={props.points} />
           <UserPhotoInfo user={props.user} />
           <ColightButton
             isPathsLoaded={props.isPathsLoaded}
@@ -30,7 +28,7 @@ export const UserPhotoDetails = (props: UserPhotoDetailsProps): JSX => {
           />
         </View>
       ) : (
-        <Spinner isFlex />
+        <Spinner isDefaultOptions />
       )}
     </>
   );

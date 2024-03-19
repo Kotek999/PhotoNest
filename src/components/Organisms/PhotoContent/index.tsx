@@ -8,6 +8,7 @@ import { PhotoWarning } from "../../../components/Atoms/PhotoWarning";
 import { Spinner } from "../../../components/Atoms/Spinner";
 import { RenderAddedPhotos } from "../../../components/Molecules/RenderAddedPhotos";
 import { COLORS } from "../../../colors";
+import { screenHeight } from "../../../helpers/dimensions";
 
 export const PhotoContent = (props: PhotoContentProps): JSX => {
   return (
@@ -39,7 +40,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
                     )}
                   </View>
                 ) : (
-                  <Spinner isFlex={false} />
+                  <Spinner isDefaultOptions={false} style={styles.spinner} />
                 )}
               </View>
             ) : (
@@ -51,7 +52,7 @@ export const PhotoContent = (props: PhotoContentProps): JSX => {
           </View>
         </View>
       ) : (
-        <Spinner isFlex={false} />
+        <Spinner isDefaultOptions={false} style={styles.spinner} />
       )}
     </View>
   );
@@ -69,5 +70,12 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     backgroundColor: COLORS.purpleBg,
+  },
+  spinner: {
+    height: screenHeight / 1.4,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
   },
 });

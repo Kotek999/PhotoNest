@@ -3,14 +3,27 @@ import {
   ToastAndroid,
   RefreshControlProps,
   ImageSourcePropType,
+  StyleProp,
+  ViewStyle,
+  Animated,
 } from "react-native";
-import { AnyAction, PayloadAction, Dispatch } from "@reduxjs/toolkit";
+import { EdgeInsets } from "react-native-safe-area-context";
+import {
+  AnyAction,
+  ActionCreatorWithoutPayload,
+  PayloadAction,
+  Dispatch,
+} from "@reduxjs/toolkit";
 import { StatusBarStyle } from "expo-status-bar";
 import { rootReducer } from "../rootReducer";
 import { User } from "firebase/auth";
 import { NavigationScreenProps } from "../rootTypeList";
 import { SCREEN } from "../routes";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { signUp } from "./redux/auth/signUp/action";
+import { login } from "./redux/auth/logIn/action";
+import { signOut } from "./redux/auth/signOut/action";
+import { getAuthToken } from "./redux/auth/authToken/action";
 
 export type Children = ReactNode;
 export type JSX = React.JSX.Element;
@@ -24,16 +37,25 @@ export type OnPressAction = {
   onPress: OnPress;
 };
 
-export type ChildProps = {
+type ChildProps = {
   children: Children;
+};
+
+export type ScreenProps = ChildProps & {
   styleOfStatusBar?: StatusBarStyle;
+  bgColor?: string;
+};
+
+export type ScrollViewContainerProps = ChildProps & {
+  style?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
   refreshControl?:
     | React.ReactElement<
         RefreshControlProps,
         string | React.JSXElementConstructor<any>
       >
     | undefined;
-  bgColor?: string;
+  isDefaultOptions: boolean;
 };
 
 export type SubmitButtonProps = {
@@ -102,6 +124,8 @@ export type Colors = {
   sunsetOrange: string;
   emerald: string;
   lightGrayInput: string;
+  lightPink: string;
+  lightPurple: string;
   [key: string]: string;
 };
 
@@ -338,7 +362,9 @@ export type AddPhotoButtonProps = {
 };
 
 export type TitleProps = {
-  title: string;
+  title?: string;
+  userNameForTitle?: string;
+  isTitleForNotExistPhotos?: boolean;
   isPermissionRequest?: boolean;
 };
 
@@ -464,6 +490,8 @@ export type UserPhotosProps = {
   isUserPhotosLoaded: boolean;
   isPhotosNotExist: boolean;
   userPhotos: UserPhotosData[];
+  userNameOfPhotos?: OptionalString;
+  userName?: OptionalString;
 };
 
 type UserPhotosOnPressActions = {
@@ -602,12 +630,15 @@ export type BottomModalProps = {
   onPressCloseModal: OnPress;
   children: Children;
   isTitleExist?: boolean;
+  isDefaultStyle?: boolean;
+  styles?: StyleProp<ViewStyle | Animated.AnimatedProps<ViewStyle>>;
   title?: string;
 };
 
 export type SpinnerProps = {
-  isFlex: boolean;
+  style?: StyleProp<ViewStyle>;
   isTextExist?: boolean;
+  isDefaultOptions: boolean;
 };
 
 export type UserPathData = {
@@ -684,4 +715,241 @@ export type ParagraphProps = {
 
 export type AmountOfColightsProps = {
   points: number;
+};
+
+export type OptionalUserDataFirebase = UserDataFirebase[] | undefined;
+
+export type PositionIconsProps = {
+  position: number;
+  isDefaultStyle?: boolean;
+  styles?: StyleProp<ViewStyle | Animated.AnimatedProps<ViewStyle>>;
+};
+
+export type ImageIconProps = {
+  source: ImageSourcePropType;
+};
+
+export type ScoreBoardUserData = {
+  uid: OptionalString;
+  position: number;
+  isUserLogged: boolean;
+  avatarPath: OptionalString;
+  userName: OptionalString;
+  points: OptionalNumber;
+};
+
+export type ScoreBoardUserDataProps = {
+  user: UserDataFirebase;
+  index: number;
+};
+
+export type BoardWithUsersProps = {
+  allUsersData: OptionalUserDataFirebase;
+  isContentLoaded: boolean;
+};
+
+export type BoardRowProps = {
+  data: ScoreBoardUserData;
+  isContentLoaded?: boolean;
+};
+
+export type ScoreBoardHeaderProps = {
+  onPressGoBack: OnPress;
+  isTitleExist?: boolean;
+};
+
+export type TouchableAvatarWithUserInfoProps = {
+  onPressGoToProfile: OnPress;
+  userDataFirebase: UserDataFirebase;
+};
+
+export type BackgroundHeaderProps = ScoreBoardHeaderProps &
+  TouchableAvatarWithUserInfoProps & {
+    isContentLoaded: boolean;
+  };
+
+export type ScrollViewContainerWithBoardProps = {
+  isContentLoaded: boolean;
+  isBoardDataLoaded: boolean;
+  insets: EdgeInsets;
+  allUsersData: OptionalUserDataFirebase;
+};
+
+export type ScoreBoardContentProps = ScrollViewContainerWithBoardProps &
+  ScoreBoardHeaderProps &
+  TouchableAvatarWithUserInfoProps;
+
+export type UseUserDataProps = {
+  nick: string;
+  email: string;
+  password: string;
+  setNick: SetState<string>;
+  setEmail: SetState<string>;
+  setPassword: SetState<string>;
+};
+
+export type ReduxAction =
+  | typeof signUp
+  | typeof login
+  | typeof signOut
+  | typeof getAuthToken;
+
+type RedirectWithActionProps = {
+  action: ReduxAction;
+  redirect: (screenName: string) => void;
+};
+
+export type UseReduxAuthProps = RedirectWithActionProps & {
+  email: string;
+  password: string;
+  nick?: string;
+};
+
+type UseReduxActionProps = RedirectWithActionProps;
+
+export type UseReduxProps = UseReduxActionProps | UseReduxAuthProps;
+
+export type UseLoadingWithDispatchEffectProps = {
+  dispatchValue: ActionCreatorWithoutPayload<`${string}/clearError`>;
+  loading: (state: RootState) => boolean;
+};
+
+type BoardUserInfoWithPhotosProps = {
+  isUserPhotosLoaded: boolean;
+  isPhotosNotExist: boolean;
+  userPhotos: UserPhotosData[];
+  data: ScoreBoardUserData;
+  insets: EdgeInsets;
+};
+
+export type BoardUserPhotosProps = BoardUserInfoWithPhotosProps & {
+  userName: OptionalString;
+  userNameOfPhotos: OptionalString;
+};
+
+export type TouchableRowWithUserInfoProps = {
+  data: ScoreBoardUserData;
+  onPressGetPhotos: OnPress;
+};
+
+export type BoardBackgroundHeaderWithUserInfoProps = {
+  onPressGoBack: OnPress;
+  isContentLoaded?: boolean;
+  data: ScoreBoardUserData;
+};
+
+export type BoardBottomModalContentProps = BoardUserInfoWithPhotosProps &
+  BoardBackgroundHeaderWithUserInfoProps;
+
+export type ArrayOperationProps<T, R> = (
+  array: T[],
+  method: keyof Array<T>,
+  func: (element: T, index: number, array: T[]) => R,
+  ...args: any[]
+) => R[];
+
+export type UserPointsProps = {
+  moreThanZero: UserDataFirebase[];
+  withZero: UserDataFirebase[];
+};
+
+export type FilteredBoardRowContentProps = {
+  usersWithMoreThanZeroPoints: OptionalUserDataFirebase;
+  usersWithZeroPoints: OptionalUserDataFirebase;
+  isContentLoaded: boolean;
+};
+
+export type ModalForZeroPointsUsersProps = {
+  user: UserDataFirebase;
+  index?: number;
+};
+
+export type GalleryContentProps = {
+  refreshing: boolean;
+  onRefresh: OnPress;
+  navigation: NavigationScreenProps<SCREEN.Gallery>;
+  isContentLoaded: boolean;
+  isPhotosLoaded: boolean;
+  isPermissionRequest: boolean;
+  mediaPermission: boolean | null;
+  addedPhoto: string;
+  photos: ImageAssetsData[];
+  displayName: UserDataFirebaseInfo;
+  colight: number | undefined;
+  setIsPermissionRequest: SetState<boolean>;
+  addPhoto: () => Promise<void>;
+};
+
+export type UseNavigationOnPressActionProps = {
+  onPressGoToSignUp: OnPress;
+  onPressGoToLogin: OnPress;
+  onPressGoToSettings: OnPress;
+  onPressGoToProfile: OnPress;
+  onPressGoBack: OnPress;
+};
+
+export type UseLoadedProps = {
+  isContentLoaded: boolean;
+  isBoardDataLoaded: boolean;
+  isPathsLoaded: boolean;
+  isPhotosLoaded: boolean;
+  isUserPhotosLoaded: boolean;
+  refreshing: boolean;
+  setIsContentLoaded: SetState<boolean>;
+  setIsBoardDataLoaded: SetState<boolean>;
+  setIsPathsLoaded: SetState<boolean>;
+  setIsPhotosLoaded: SetState<boolean>;
+  setIsUserPhotosLoaded: SetState<boolean>;
+  setRefreshing: SetState<boolean>;
+};
+
+export type UseUserDataFirebaseProps = {
+  userDataFirebase: UserDataFirebase;
+  allUsersData: OptionalUserDataFirebase;
+  data: UserDataFirebase;
+  setUserDataFirebase: SetState<UserDataFirebase>;
+  setAllUsersData: SetState<OptionalUserDataFirebase>;
+  setData: SetState<UserDataFirebase>;
+};
+
+export type UseUserPhotosProps = {
+  userPhotos: UserPhotosData[];
+  photoPaths: string[];
+  photos: ImageAssetsData[];
+  addedPhoto: string;
+  userAvatar: Children;
+  isPhotosNotExist: boolean;
+  setUserPhotos: SetState<UserPhotosData[]>;
+  setPhotoPaths: SetState<string[]>;
+  setPhotos: SetState<ImageAssetsData[]>;
+  setAddedPhoto: SetState<string>;
+  setUserAvatar: SetState<Children>;
+  setIsPhotosNotExist: SetState<boolean>;
+};
+
+export type UseVisibleProps = {
+  isDialogVisible: boolean;
+  isUserVisible: boolean;
+  visibleLength: VisibleLength;
+  setDialogVisible: SetState<boolean>;
+  setUserVisible: SetState<boolean>;
+  setVisibleLength: SetState<VisibleLength>;
+};
+
+export type UsePhotoPermissionProps = {
+  mediaPermission: boolean | null;
+  isPermissionRequest: boolean;
+  setMediaPermission: SetState<boolean | null>;
+  setIsPermissionRequest: SetState<boolean>;
+};
+
+export type UsePointsProps = {
+  isColightExist: boolean;
+  pointsValue: number[];
+  setIsColightExist: SetState<boolean>;
+  setPointsValue: SetState<number[]>;
+};
+
+export type ActionProps = UseLoadingWithDispatchEffectProps & {
+  action: typeof login | typeof signUp;
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { JSX, ChildProps as ScreenProps } from "../../../types";
+import { JSX, ScreenProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { View } from "react-native-ui-lib";
 

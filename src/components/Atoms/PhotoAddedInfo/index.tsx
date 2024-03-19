@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { View, Text } from "react-native-ui-lib";
 import { Children, JSX, PhotoAddedInfoProps } from "../../../types";
@@ -7,10 +7,12 @@ import { generateDateMessage } from "../../../helpers/functions/generateDateMess
 import { getCurrentDateAndTime } from "../../../helpers/functions/getCurrentDateAndTime";
 import { Spinner } from "../Spinner";
 import { getUserAvatar } from "../../../helpers/functions/getUserAvatar";
+import { useUserPhotos } from "../../../hooks/userPhotos/useUserPhotos";
+import { useLoaded } from "../../../hooks/loaded/useLoaded";
 
 export const PhotoAddedInfo = (props: PhotoAddedInfoProps): JSX => {
-  const [userAvatar, setUserAvatar] = useState<Children | null>(null);
-  const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
+  const { userAvatar, setUserAvatar } = useUserPhotos();
+  const { isContentLoaded, setIsContentLoaded } = useLoaded();
 
   const getDateMessage = generateDateMessage(
     `${props.createdAt.date} ${props.createdAt.time}`,
@@ -44,7 +46,7 @@ export const PhotoAddedInfo = (props: PhotoAddedInfoProps): JSX => {
           </View>
         </>
       ) : (
-        <Spinner isFlex />
+        <Spinner isDefaultOptions />
       )}
     </View>
   );

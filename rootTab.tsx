@@ -6,7 +6,7 @@ import { JSX } from "./src/types";
 import { SCREEN } from "./routes";
 import { COLORS } from "./src/colors";
 import { Gallery } from "./src/Screens/Gallery";
-import { Favorite } from "./src/Screens/Favorite";
+import { ScoreBoard } from "./src/Screens/ScoreBoard";
 import { Find } from "./src/Screens/Find";
 import { Profile } from "./src/Screens/Profile";
 import { createTabBarIcon } from "./src/helpers/functions/createTabBarIcon";
@@ -38,17 +38,17 @@ export const RootTab = (): JSX => {
         component={Gallery}
       />
       <Tab.Screen
-        name={SCREEN.Favorite}
+        name={SCREEN.ScoreBoard}
         options={{
-          title: SCREEN.Favorite,
+          title: SCREEN.ScoreBoard,
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             createTabBarIcon({
               isFocused: focused,
-              iconName: "star",
+              iconName: "trophy",
             }),
         }}
-        component={Favorite}
+        component={ScoreBoard}
       />
       <Tab.Screen
         name={SCREEN.Find}

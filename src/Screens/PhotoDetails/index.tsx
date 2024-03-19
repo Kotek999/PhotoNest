@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { JSX, UserDataFirebase } from "../../types";
+import React, { useEffect, useCallback } from "react";
+import { JSX } from "../../types";
 import { SCREEN } from "../../../routes";
 import { PhotoDetailsScreenProps } from "../../../rootTypeList";
-import { useFocusEffect } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { setColight, setPoints } from "../../redux/setColight/action";
 import { getUserDataByUid } from "../../helpers/functions/getUserDataByUid";
@@ -11,16 +10,33 @@ import { getPoints } from "../../helpers/functions/getPoints";
 import { useUserData } from "../../helpers/functions/useUserData";
 import { PhotoDetailsContent } from "../../components/Organisms/PhotoDetailsContent";
 import { Screen } from "../../components/Atoms/Screen";
+import { useReduxActionWithDispatch } from "../../hooks/dispatch/useReduxDispatch";
+import { useNavigation } from "../../hooks/navigation/useNavigation";
+import { useLoaded } from "../../hooks/loaded/useLoaded";
+import { usePoints } from "../../hooks/points/usePoints";
+import { useUserPhotos } from "../../hooks/userPhotos/useUserPhotos";
+import { useUserDataFirebase } from "../../hooks/userDataFirebase/useUserDataFirebase";
 
 export const PhotoDetails = ({
   navigation,
   route,
 }: PhotoDetailsScreenProps<SCREEN.PhotoDetails>): JSX => {
+  const {
+    isContentLoaded,
+    isPathsLoaded,
+    setIsContentLoaded,
+    setIsPathsLoaded,
+  } = useLoaded();
+  const { isColightExist, pointsValue, setIsColightExist, setPointsValue } =
+    usePoints();
+  const { photoPaths, setPhotoPaths } = useUserPhotos();
+  const { data, setData } = useUserDataFirebase();
+
   const { photoData } = route.params;
 
   const dispatch = useDispatch();
-
-  const onPressGoBack = () => navigation.goBack();
+  const { useDispatchEffect } = useReduxActionWithDispatch();
+  const { onPressGoBack } = useNavigation({ navigation, route });
   const onPressSetColight = useCallback(() => {
     dispatch(
       setColight({
@@ -34,13 +50,6 @@ export const PhotoDetails = ({
     );
     setIsColightExist(!isColightExist);
   }, []);
-
-  const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
-  const [isPathsLoaded, setIsPathsLoaded] = useState<boolean>(false);
-  const [isColightExist, setIsColightExist] = useState<boolean>(true);
-  const [pointsValue, setPointsValue] = useState<number[]>([]);
-  const [photoPaths, setPhotoPaths] = useState<string[]>([]);
-  const [data, setData] = useState<UserDataFirebase>();
 
   const user = useUserData(photoData, data);
   const points = getPoints(pointsValue);
@@ -57,9 +66,7 @@ export const PhotoDetails = ({
     );
   }, []);
 
-  useFocusEffect(() => {
-    dispatch(setPoints({ points: points, userId: user.uid }));
-  });
+  useDispatchEffect(setPoints({ points: points, userId: user.uid }), true);
 
   return (
     <Screen styleOfStatusBar="light">

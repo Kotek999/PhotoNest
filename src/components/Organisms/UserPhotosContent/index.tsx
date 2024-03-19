@@ -9,7 +9,7 @@ export const UserPhotosContent = (props: UserPhotosContentProps): JSX => {
   return (
     <>
       {props.isContentLoaded ? (
-        <ScrollViewContainer>
+        <ScrollViewContainer isDefaultOptions>
           <UserProfileAvatarWithButton
             isDialogVisible={props.isDialogVisible}
             userData={props.userData}
@@ -20,13 +20,15 @@ export const UserPhotosContent = (props: UserPhotosContentProps): JSX => {
             onPressTruncate={props.onPressTruncate}
           />
           <UserPhotos
+            userName="you"
+            userNameOfPhotos="Your"
             isUserPhotosLoaded={props.isUserPhotosLoaded}
             isPhotosNotExist={props.isPhotosNotExist}
             userPhotos={props.userPhotos}
           />
         </ScrollViewContainer>
       ) : (
-        <Spinner isFlex />
+        <Spinner isDefaultOptions />
       )}
     </>
   );

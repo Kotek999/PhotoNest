@@ -9,13 +9,15 @@ import { Header } from "../../components/Molecules/Header";
 import { SCREEN } from "../../../routes";
 import { ScrollViewContainer } from "../../components/Atoms/ScrollViewContainer";
 import { NavigationScreenProps } from "../../../rootTypeList";
+import { useNavigation } from "../../hooks/navigation/useNavigation";
 
 export const Settings = ({
   navigation,
+  route,
 }: NavigationScreenProps<SCREEN.Settings>): JSX => {
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
 
-  const onPressGoBack = () => navigation.goBack();
+  const { onPressGoBack } = useNavigation({ navigation, route });
 
   useEffect(() => {
     setIsContentLoaded(true);
@@ -29,7 +31,7 @@ export const Settings = ({
         screenName={SCREEN.Settings}
         onPressGoToSettings={onPressGoBack}
       />
-      <ScrollViewContainer>
+      <ScrollViewContainer isDefaultOptions>
         {isContentLoaded ? (
           <View
             style={{
@@ -40,7 +42,9 @@ export const Settings = ({
               alignContent: "center",
             }}
           >
-            <Text style={{ margin: 10, fontSize: 28, color: COLORS.white }}>Settings</Text>
+            <Text style={{ margin: 10, fontSize: 28, color: COLORS.white }}>
+              Settings
+            </Text>
             {/* <FontAwesome5
               name="user-clock"
               size={32}

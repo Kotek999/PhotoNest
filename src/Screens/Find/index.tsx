@@ -9,13 +9,15 @@ import { Header } from "../../components/Molecules/Header";
 import { SCREEN } from "../../../routes";
 import { ScrollViewContainer } from "../../components/Atoms/ScrollViewContainer";
 import { NavigationScreenProps } from "../../../rootTypeList";
+import { useNavigation } from "../../hooks/navigation/useNavigation";
 
 export const Find = ({
   navigation,
+  route,
 }: NavigationScreenProps<SCREEN.Find>): JSX => {
   const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
 
-  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
+  const { onPressGoToSettings } = useNavigation({ navigation, route });
 
   useEffect(() => {
     setIsContentLoaded(true);
@@ -29,7 +31,7 @@ export const Find = ({
         screenName={SCREEN.Find}
         onPressGoToSettings={onPressGoToSettings}
       />
-      <ScrollViewContainer>
+      <ScrollViewContainer isDefaultOptions>
         {isContentLoaded ? (
           <View
             style={{

@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { RefreshControl } from "react-native";
+import React, { useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { JSX, ImageAssetsData, UserDataFirebase } from "../../types";
+import { JSX } from "../../types";
 import { SCREEN } from "../../../routes";
 import { useDispatch } from "react-redux";
 import { backHandlerCall } from "../../helpers/functions/backHandlerCall";
 import { Screen } from "../../components/Atoms/Screen";
 import { showCurrentLoggedUser } from "../../helpers/functions/showCurrentLoggedUser";
 import { Header } from "../../components/Molecules/Header";
-import { ScrollViewContainer } from "../../components/Atoms/ScrollViewContainer";
 import { getPhotosFromFirebase } from "../../helpers/functions/getPhotosFromFirebase";
 import { getMediaPermissionRequest } from "../../helpers/functions/getMediaPermissionRequest";
 import { getPhotoInfo } from "../../helpers/functions/getPhotoInfo";
 import { useRefresh } from "../../helpers/functions/useRefresh";
-import { AddPhotoButton } from "../../components/Atoms/AddPhotoButton";
-import { PhotoContent } from "../../components/Organisms/PhotoContent";
 import { COLORS } from "../../colors";
 import { NavigationScreenProps } from "../../../rootTypeList";
 import { getUserData } from "../../helpers/functions/getUserData";
-import { BottomModal } from "../../components/Atoms/BottomModal";
-import { ColightInfo } from "../../components/Atoms/ColightInfo";
-import { useBottomModal } from "../../helpers/functions/useBottomModal";
+import { GalleryContent } from "../../components/Organisms/GalleryContent";
+import { useNavigation } from "../../hooks/navigation/useNavigation";
+import { useUserDataFirebase } from "../../hooks/userDataFirebase/useUserDataFirebase";
+import { useVisible } from "../../hooks/visible/useVisible";
+import { useLoaded } from "../../hooks/loaded/useLoaded";
+import { usePhotoPermission } from "../../hooks/photoPermission/usePhotoPermission";
+import { useUserPhotos } from "../../hooks/userPhotos/useUserPhotos";
 
 export const Gallery = ({
   navigation,
@@ -28,24 +28,27 @@ export const Gallery = ({
 }: NavigationScreenProps<SCREEN.Gallery>): JSX => {
   const dispatch = useDispatch();
 
-  const [userDataFirebase, setUserDataFirebase] = useState<UserDataFirebase>();
-
-  const [isUserVisible, setUserVisible] = useState<boolean>(false);
-  const [isContentLoaded, setIsContentLoaded] = useState<boolean>(false);
-
-  const [mediaPermission, setMediaPermission] = useState<boolean | null>(null);
-
-  const [photos, setPhotos] = useState<ImageAssetsData[]>([]);
-  const [isPhotosLoaded, setIsPhotosLoaded] = useState<boolean>(false);
-
-  const [isPermissionRequest, setIsPermissionRequest] =
-    useState<boolean>(false);
-
-  const [addedPhoto, setAddedPhoto] = useState<string>("");
-  const [refreshing, setRefreshing] = useState<boolean>(false);
-
-  const onPressGoToSettings = () => navigation.navigate(SCREEN.Settings);
-  const onPressGoToProfile = () => navigation.navigate(SCREEN.Profile);
+  const { userDataFirebase, setUserDataFirebase } = useUserDataFirebase();
+  const { isUserVisible, setUserVisible } = useVisible();
+  const {
+    isContentLoaded,
+    isPhotosLoaded,
+    refreshing,
+    setIsContentLoaded,
+    setIsPhotosLoaded,
+    setRefreshing,
+  } = useLoaded();
+  const {
+    mediaPermission,
+    isPermissionRequest,
+    setMediaPermission,
+    setIsPermissionRequest,
+  } = usePhotoPermission();
+  const { photos, addedPhoto, setPhotos, setAddedPhoto } = useUserPhotos();
+  const { onPressGoToSettings, onPressGoToProfile } = useNavigation({
+    navigation,
+    route,
+  });
 
   const addPhoto = () =>
     getPhotoInfo({
@@ -80,8 +83,6 @@ export const Gallery = ({
     setIsContentLoaded(true);
   }, [photos]);
 
-  const modal = useBottomModal();
-
   return (
     <Screen styleOfStatusBar="light" bgColor={COLORS.purpleBg}>
       <Header
@@ -94,44 +95,21 @@ export const Gallery = ({
         onPressGoToProfile={onPressGoToProfile}
         onPressGoToSettings={onPressGoToSettings}
       />
-      <ScrollViewContainer
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor={COLORS.emerald}
-            colors={[COLORS.emerald]}
-            progressBackgroundColor={COLORS.purpleBg}
-          />
-        }
-      >
-        <PhotoContent
-          navigation={{ navigation: navigation, route }}
-          isContentLoaded={isContentLoaded}
-          isPhotosLoaded={isPhotosLoaded}
-          isPermissionRequest={isPermissionRequest}
-          mediaPermission={mediaPermission}
-          addedPhoto={addedPhoto}
-          photos={photos}
-          displayName={userDataFirebase?.nickname}
-          colight={userDataFirebase?.points}
-          onPressOpenModal={() => modal.onPressOpenModal(0)}
-        />
-      </ScrollViewContainer>
-
-      <AddPhotoButton
+      <GalleryContent
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        navigation={{ navigation: navigation, route }}
+        isContentLoaded={isContentLoaded}
+        isPhotosLoaded={isPhotosLoaded}
+        isPermissionRequest={isPermissionRequest}
         mediaPermission={mediaPermission}
+        addedPhoto={addedPhoto}
+        photos={photos}
+        displayName={userDataFirebase?.nickname}
+        colight={userDataFirebase?.points}
         setIsPermissionRequest={setIsPermissionRequest}
         addPhoto={addPhoto}
       />
-      <BottomModal
-        ref={modal.bottomSheetModalRef}
-        enableContentPanningGesture
-        snapPointsValue="100%"
-        onPressCloseModal={modal.onPressCloseModal}
-      >
-        <ColightInfo />
-      </BottomModal>
     </Screen>
   );
 };

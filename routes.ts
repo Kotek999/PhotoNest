@@ -6,7 +6,7 @@ export enum SCREEN {
   Home = "Home",
   Gallery = "Gallery",
   Test = "Test",
-  Favorite = "Favorite",
+  ScoreBoard = "ScoreBoard",
   Find = "Find",
   Profile = "Profile",
   Settings = "Settings",

@@ -15,4 +15,6 @@ export const COLORS: Colors = {
   sunsetOrange: "#f64747",
   emerald: "#3fc380",
   lightGrayInput: "#dadfe1",
+  lightPink: "#77477e",
+  lightPurple: "#604878",
 };

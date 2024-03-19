@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     fontFamily: "Open-Sans",
     fontSize: 20,
-    color: "white",
+    color: COLORS.white,
   },
   highlightedDescriptionValue: {
     letterSpacing: 0.5,

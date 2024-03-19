@@ -10,11 +10,10 @@ export type RootStackParamList = {
   Home: undefined;
   Gallery: undefined;
   Test: undefined;
-  Favorite: undefined;
+  ScoreBoard: undefined;
   Find: undefined;
   Profile: undefined;
   Settings: undefined;
-
   PhotoDetails: { photoData: ImageAssetsData };
 };
 

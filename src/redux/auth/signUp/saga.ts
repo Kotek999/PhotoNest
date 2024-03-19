@@ -69,6 +69,7 @@ function* onSignUpUser(action: SignUpAction) {
                 avatar: {
                   directPath: "",
                 },
+                points: 0,
               }
             );
 

@@ -47,8 +47,6 @@ export const getUserRightPathByUid = async (
           setPhotoPaths(Array.from(new Set(values as string[])));
         }
         setIsPathsLoaded(true);
-      } else {
-        console.warn(textData.value.firebase.error.dataNotExist);
       }
     };
 

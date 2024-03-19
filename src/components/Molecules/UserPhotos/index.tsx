@@ -1,4 +1,3 @@
-import textData from "../../../../textData.json";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { View, Text } from "react-native-ui-lib";
@@ -11,21 +10,26 @@ import { PhotoOfUser } from "../../Atoms/PhotoOfUser";
 export const UserPhotos = (props: UserPhotosProps): JSX => {
   return (
     <>
-      <View>
-        <Text
-          style={{
-            ...styles.value,
-            marginLeft: 14,
-            color: COLORS.white,
-          }}
-        >
-          Your photos:
-        </Text>
+      <View style={{ marginTop: 20, marginBottom: 10 }}>
+        {!props.isPhotosNotExist && (
+          <Text
+            style={{
+              ...styles.value,
+              marginLeft: 14,
+              color: COLORS.white,
+            }}
+          >
+            {`${props.userNameOfPhotos} photos:`}
+          </Text>
+        )}
       </View>
       {props.isUserPhotosLoaded ? (
         <View style={styles.mainContainer}>
           {props.isPhotosNotExist && (
-            <PhotoMessage title={textData.value.photo.title.message.noPhotos} />
+            <PhotoMessage
+              isTitleForNotExistPhotos
+              userNameForTitle={props.userName}
+            />
           )}
           <View style={styles.photosContainer}>
             {props.userPhotos.map((photo, i) => (
@@ -33,7 +37,7 @@ export const UserPhotos = (props: UserPhotosProps): JSX => {
                 <PhotoOfUser uri={photo.directUrl} mb={10} />
                 <View style={styles.dateContainer}>
                   <Text style={styles.value}>
-                    Date: {photo.createdAt.date} {photo.createdAt.time}
+                    {photo.createdAt.date} · {photo.createdAt.time}
                   </Text>
                 </View>
               </View>
@@ -41,7 +45,7 @@ export const UserPhotos = (props: UserPhotosProps): JSX => {
           </View>
         </View>
       ) : (
-        <Spinner isFlex />
+        <Spinner isDefaultOptions />
       )}
     </>
   );
@@ -56,25 +60,24 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   photosContainer: {
-    marginBottom: 20,
+    marginBottom: 40,
   },
   photoContainer: {
     flex: 1,
     height: 250,
     marginTop: 10,
-    marginBottom: 100,
+    marginBottom: 40,
   },
   dateContainer: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    alignContent: "center",
+    backgroundColor: COLORS.darkOpacity,
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    borderRadius: 10,
+    padding: 10,
   },
   value: {
-    marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 10,
-    color: COLORS.grayField,
+    color: COLORS.white,
     letterSpacing: 0.5,
     fontFamily: "Open-Sans",
   },

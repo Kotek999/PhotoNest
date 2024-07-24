@@ -10,8 +10,8 @@ export const SignOutButton = (props: SignOutButtonProps): JSX => {
       onPress={props.onPress}
       style={styles.button}
       color={COLORS.white}
-      size="medium"
-      label="SignOut"
+      size="large"
+      label="Sign out"
       labelStyle={styles.label}
     />
   );
@@ -19,14 +19,13 @@ export const SignOutButton = (props: SignOutButtonProps): JSX => {
 
 const styles = StyleSheet.create({
   button: {
-    marginLeft: 10,
     backgroundColor: COLORS.emerald,
     borderRadius: 20,
   },
   label: {
     fontFamily: "Open-Sans",
     letterSpacing: 0.5,
-    fontSize: 14.5,
+    fontSize: 18,
     fontWeight: "700",
   },
 });

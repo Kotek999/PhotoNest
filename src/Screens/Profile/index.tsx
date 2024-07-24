@@ -18,6 +18,7 @@ import { useUserPhotos } from "../../hooks/userPhotos/useUserPhotos";
 import { useLoaded } from "../../hooks/loaded/useLoaded";
 import { useUserDataFirebase } from "../../hooks/userDataFirebase/useUserDataFirebase";
 import { useVisible } from "../../hooks/visible/useVisible";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const Profile = ({
   navigation,

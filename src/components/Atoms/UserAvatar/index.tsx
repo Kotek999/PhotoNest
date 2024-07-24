@@ -8,8 +8,8 @@ export const UserAvatar = (props: AvatarProps): JSX => {
   return (
     <Avatar
       label={getFirstLetter(props.nickname)}
-      labelColor={COLORS.white}
-      size={80}
+      labelColor={COLORS.blank}
+      size={props.size}
       backgroundColor={COLORS.darkOpacity}
       onPress={props.onPressOpenModal}
       source={props.source}

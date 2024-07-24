@@ -462,14 +462,14 @@ export type TruncateProps = {
 
 export type UserRowProps = TruncateProps & {
   label: string;
-  value: string | undefined;
+  value: string | number | undefined;
   isTruncateLabel: boolean;
 };
 
 type Row = {
   isTruncateLabel: boolean;
   label: string;
-  value: string | undefined;
+  value: string | number | undefined;
 };
 
 type TruncateData = Row & {
@@ -591,6 +591,7 @@ export type DialogUserProps = DialogWithUserInfoProps & {
 export type AvatarProps = {
   nickname: OptionalString;
   onPressOpenModal?: OnPress;
+  size?: number | undefined;
   source: ImageSourcePropType | undefined;
 };
 
@@ -953,3 +954,65 @@ export type UsePointsProps = {
 export type ActionProps = UseLoadingWithDispatchEffectProps & {
   action: typeof login | typeof signUp;
 };
+
+export type ContentData = {
+  id: number;
+  subTitle: string;
+  subSections: { first: string; second?: string; third?: string };
+  isAllSubSectionsExist: boolean;
+  image?: ImageSourcePropType | undefined;
+};
+
+export type SettingsOptionsData = {
+  title: string;
+  iconName: string;
+  content: ContentData[] | string;
+}[];
+
+type OptionSetProps = {
+  setSelectedTitle: SetState<string>;
+  setSelectedOption: SetState<ContentData[]>;
+};
+
+type OptionProps = OptionSetProps & {
+  userData: UserDataFirebase;
+  selectedTitle: string;
+  selectedOption: ContentData[];
+};
+
+type OptionFieldProps = {
+  option: {
+    title: string;
+    iconName: string;
+    content: ContentData[] | string;
+  };
+};
+
+export type OptionContentProps = {
+  selectedOption: ContentData[];
+  isRegulationsOption: boolean;
+  moreThanValue: number;
+};
+
+export type SettingsContentProps = OptionProps & {
+  isContentLoaded: boolean;
+  settingsOptionsData: SettingsOptionsData;
+  onPressSignOutAndExit: OnPress;
+};
+
+export type ModalSettingsOptionRowContentProps = OptionProps & OptionFieldProps;
+
+export type UserSettingsAvatarWithNameProps = {
+  userData: UserDataFirebase;
+};
+
+export type UserAvatarWithIconProps = {
+  userData: UserDataFirebase;
+  selectedAvatar: AvatarSourceProp;
+  openModal: OnPress;
+};
+
+export type OptionRowProps = OptionFieldProps &
+  OptionSetProps & {
+    openOptionModal: OnPress;
+  };

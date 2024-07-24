@@ -1,4 +1,3 @@
-import textData from "../../../../textData.json";
 import React, { useMemo } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { View, Button } from "react-native-ui-lib";

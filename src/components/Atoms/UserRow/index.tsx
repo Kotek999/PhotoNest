@@ -4,6 +4,7 @@ import { View, Text } from "react-native-ui-lib";
 import { JSX, UserRowProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { createTruncateForText } from "../../../helpers/functions/createTruncateForText";
+import { screenWidth } from "../../../helpers/dimensions";
 
 export const UserRow = (props: UserRowProps): JSX => {
   const isTruncate = props.isTruncateLabel;
@@ -40,12 +41,13 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   label: {
+    fontSize: 20,
     color: COLORS.lightGrayInput,
     letterSpacing: 0.5,
     fontWeight: "600",
   },
   labelWidth: {
-    width: 60,
+    width: 120,
   },
   valueContainer: {
     flexDirection: "row",
@@ -53,13 +55,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   value: {
+    fontSize: 20,
     color: COLORS.grayItemMenu,
     letterSpacing: 0.5,
   },
   truncateValue: {
+    width: screenWidth / 1.7,
+    fontSize: 20,
     color: COLORS.grayItemMenu,
     letterSpacing: 0.5,
-    marginLeft: 44,
-    marginRight: 44,
+    marginLeft: 95,
+    marginRight: 0,
   },
 });

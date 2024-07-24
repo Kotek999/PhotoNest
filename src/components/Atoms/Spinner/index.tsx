@@ -11,7 +11,7 @@ export const Spinner = (props: SpinnerProps): JSX => {
     <View style={props.isDefaultOptions ? styles.flexContainer : props.style}>
       <ActivityIndicator size="large" color={COLORS.emerald} />
       {props.isTextExist && (
-        <Text style={styles.loadingValue}>Welcome again</Text>
+        <Text style={styles.loadingValue}>Welcome back</Text>
       )}
     </View>
   );

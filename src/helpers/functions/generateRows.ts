@@ -27,6 +27,11 @@ export const generateRows = (props: TruncateProps) => {
       label: "Role:",
       value: props.userData?.role,
     },
+    {
+      isTruncateLabel: false,
+      label: "Points:",
+      value: props.userData?.points,
+    },
   ];
   return TRUNCATE_USER_DATA;
 };

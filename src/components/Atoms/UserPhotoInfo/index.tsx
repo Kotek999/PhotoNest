@@ -6,6 +6,7 @@ import { View, Text, Avatar } from "react-native-ui-lib";
 import { JSX, UserPhotoProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { getFirstLetter } from "../../../helpers/functions/getFirstLetter";
+import { formatDate } from "../../../helpers/functions/formatDate";
 
 export const UserPhotoInfo = (props: UserPhotoProps): JSX => {
   return (
@@ -17,7 +18,7 @@ export const UserPhotoInfo = (props: UserPhotoProps): JSX => {
             {props.user.createdAt.time}
           </Text>
           <Text style={styles.descriptionValue}>
-            {props.user.createdAt.date}
+            {formatDate(props.user.createdAt.date)}
           </Text>
         </View>
       </View>

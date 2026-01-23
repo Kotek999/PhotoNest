@@ -69,7 +69,7 @@ type ReactElement<
   P = any,
   T extends string | React.JSXElementConstructor<any> =
     | string
-    | React.JSXElementConstructor<any>
+    | React.JSXElementConstructor<any>,
 > = {
   type: T;
   props: P;
@@ -492,6 +492,7 @@ export type UserPhotosProps = {
   userPhotos: UserPhotosData[];
   userNameOfPhotos?: OptionalString;
   userName?: OptionalString;
+  userData: UserDataFirebase;
 };
 
 type UserPhotosOnPressActions = {
@@ -559,7 +560,7 @@ export type RenderFlatListProps = {
   tempSelectedAvatar: OptionalString;
   renderItem: (props: RenderItemProps) => JSX;
   renderAvatarItem: (
-    selectAvatar: (...args: any[]) => void
+    selectAvatar: (...args: any[]) => void,
   ) => (props: RenderItemProps) => JSX;
 };
 
@@ -966,7 +967,7 @@ export type ContentData = {
 export type SettingsOptionsData = {
   title: string;
   iconName: string;
-  content: ContentData[] | string;
+  content?: ContentData[] | string;
 }[];
 
 type OptionSetProps = {
@@ -1016,3 +1017,7 @@ export type OptionRowProps = OptionFieldProps &
   OptionSetProps & {
     openOptionModal: OnPress;
   };
+
+export type AboutContentDataProp = {
+  textValue: string;
+}[];

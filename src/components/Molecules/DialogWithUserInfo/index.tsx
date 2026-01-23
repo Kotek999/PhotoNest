@@ -19,7 +19,7 @@ export const DialogWithUserInfo = (props: DialogWithUserInfoProps): JSX => {
         <View style={styles.container}>
           <Text style={styles.value}>User General Information</Text>
           <View style={styles.buttonContainer}>
-            <DialogCloseButton onPress={props.onPress} />
+            <DialogCloseButton onPress={() => props.onPress} />
           </View>
         </View>
         <UserInfo

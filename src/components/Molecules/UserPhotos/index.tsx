@@ -1,11 +1,15 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { View, Text } from "react-native-ui-lib";
 import { JSX, UserPhotosProps } from "../../../types";
 import { COLORS } from "../../../colors";
 import { PhotoMessage } from "../../../components/Atoms/PhotoMessage";
 import { Spinner } from "../../../components/Atoms/Spinner";
 import { PhotoOfUser } from "../../Atoms/PhotoOfUser";
+import { formatDate } from "../../../helpers/functions/formatDate";
+import { auth } from "../../../../FirebaseConfig";
+import { deletePhoto } from "../../../helpers/functions/deletePhoto";
 
 export const UserPhotos = (props: UserPhotosProps): JSX => {
   return (
@@ -19,7 +23,9 @@ export const UserPhotos = (props: UserPhotosProps): JSX => {
               color: COLORS.white,
             }}
           >
-            {`${props.userNameOfPhotos} photos:`}
+            {props.userPhotos.length > 1
+              ? `${props.userNameOfPhotos} photos:`
+              : `${props.userNameOfPhotos} photo:`}
           </Text>
         )}
       </View>
@@ -37,9 +43,17 @@ export const UserPhotos = (props: UserPhotosProps): JSX => {
                 <PhotoOfUser uri={photo.directUrl} mb={10} />
                 <View style={styles.dateContainer}>
                   <Text style={styles.value}>
-                    {photo.createdAt.date} · {photo.createdAt.time}
+                    {formatDate(photo.createdAt.date)} · {photo.createdAt.time}
                   </Text>
                 </View>
+                {props.userData?.id === auth.currentUser?.uid && (
+                  <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={deletePhoto}
+                  >
+                    <FontAwesome5 name="trash" size={26} color="crimson" />
+                  </TouchableOpacity>
+                )}
               </View>
             ))}
           </View>
@@ -80,5 +94,13 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     letterSpacing: 0.5,
     fontFamily: "Open-Sans",
+  },
+  deleteButton: {
+    backgroundColor: COLORS.darkOpacity,
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    borderRadius: 10,
+    padding: 10,
   },
 });

@@ -20,6 +20,7 @@ export const UserPhotosContent = (props: UserPhotosContentProps): JSX => {
             onPressTruncate={props.onPressTruncate}
           />
           <UserPhotos
+            userData={props.userData}
             userName="you"
             userNameOfPhotos="Your"
             isUserPhotosLoaded={props.isUserPhotosLoaded}

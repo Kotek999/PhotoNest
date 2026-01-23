@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native-ui-lib";
+import { View } from "react-native-ui-lib";
 import { JSX, ModalSettingsOptionRowContentProps } from "../../../types";
 import { useBottomModal } from "../../../helpers/functions/useBottomModal";
 import { BottomModal } from "../../../components/Atoms/BottomModal";
@@ -7,6 +7,7 @@ import { UserInfo } from "../../../components/Atoms/UserInfo";
 import { useVisible } from "../../../hooks/visible/useVisible";
 import { OptionRow } from "../../Atoms/OptionRow";
 import { OptionContent } from "../../Molecules/OptionContent";
+import { AboutTheApp } from "../../Atoms/AboutTheApp";
 
 export const ModalSettingsOptionRowContent = (
   props: ModalSettingsOptionRowContentProps
@@ -56,11 +57,7 @@ export const ModalSettingsOptionRowContent = (
             moreThanValue={2}
           />
         ) : (
-          props.selectedTitle === "About the app" && (
-            <Text style={{ color: "red", fontSize: 20 }}>
-              it's content for {props.selectedTitle}
-            </Text>
-          )
+          props.selectedTitle === "About the app" && <AboutTheApp />
         )}
       </BottomModal>
     </>
